@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using EsccWebTeam.Data.Web;
 
 namespace Escc.Redirects
@@ -24,16 +25,22 @@ namespace Escc.Redirects
         {
             if (redirect == null) throw new ArgumentNullException("redirect");
             if (redirect.DestinationUrl == null) throw new ArgumentException("redirect.DestinationUrl cannot be null");
-
-            // Generate redirect headers and end this response to ensure they're followed
-            switch (redirect.StatusCode)
+            try
             {
-                case 301:
-                    Http.Status301MovedPermanently(redirect.DestinationUrl);
-                    break;
-                case 303:
-                    Http.Status303SeeOther(redirect.DestinationUrl);
-                    break;
+                // Generate redirect headers and end this response to ensure they're followed
+                switch (redirect.StatusCode)
+                {
+                    case 301:
+                        Http.Status301MovedPermanently(redirect.DestinationUrl);
+                        break;
+                    case 303:
+                        Http.Status303SeeOther(redirect.DestinationUrl);
+                        break;
+                }
+            }
+            catch (ThreadAbortException)
+            {
+                Thread.ResetAbort();
             }
 
             return redirect;
