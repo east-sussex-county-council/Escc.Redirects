@@ -28,7 +28,7 @@ For IIS7+ in Integrated mode:
 	  </system.webServer>
 	</configuration>
 
-# Excluding specific patterns from redirection
+## Excluding specific patterns from redirection
 
 Because an HTTP module executes early in the request pipeline, there may be something later which would handle a URL that might otherwise be redirected. For example, the request might be rewritten in the `Application_BeginRequest` event in `global.asax.cs`. 
 
@@ -40,7 +40,7 @@ You can configure paths to be ignored using comma-separated regular expressions 
 	  	</appSettings>
 	</configuration>
 
-# Managing redirects in SQL Server 
+## Managing redirects in SQL Server 
 To use the default `SqlServerRedirectMatcher` you need to create a database using the script in `SqlServer.sql` and configure the connection in `web.config`:
 
 	<configuration>
@@ -53,7 +53,7 @@ An example 301 redirect in SQL Server from `/page1.aspx` to `/page2.aspx`:
 
 	INSERT INTO Redirect (Pattern, Destination, Type, Comment) VALUES ('page1.aspx', '/page2.aspx', 2, 'Example')
 
-# Redirecting static files
+## Redirecting static files
 To redirect requests for a file extension which is not ordinarily processed by ASP.NET you need to add a handler in `web.config`. For IIS6 or IIS7+ in Classic mode: 
 
 	<configuration>
