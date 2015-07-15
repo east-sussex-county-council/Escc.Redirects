@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Hosting;
 using Microsoft.ApplicationBlocks.ExceptionManagement;
@@ -40,6 +42,19 @@ namespace Escc.Redirects
                 if (File.Exists(HostingEnvironment.MapPath(HttpContext.Current.Request.Url.AbsolutePath)))
                 {
                     return;
+                }
+
+                // If the requested path matches an ignored pattern, do nothing
+                if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["Escc.Redirects.IgnorePaths"]))
+                {
+                    var ignorePaths = ConfigurationManager.AppSettings["Escc.Redirects.IgnorePaths"].Split(',');
+                    foreach (var ignorePath in ignorePaths)
+                    {
+                        if (Regex.IsMatch(HttpContext.Current.Request.Url.PathAndQuery, ignorePath, RegexOptions.IgnoreCase))
+                        {
+                            return;
+                        }
+                    }
                 }
 
                 // Try to match the requested URL to a redirect and, if successful, run handlers for the redirect

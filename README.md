@@ -28,6 +28,18 @@ For IIS7+ in Integrated mode:
 	  </system.webServer>
 	</configuration>
 
+# Excluding specific patterns from redirection
+
+Because an HTTP module executes early in the request pipeline, there may be something later which would handle a URL that might otherwise be redirected. For example, the request might be rewritten in the `Application_BeginRequest` event in `global.asax.cs`. 
+
+You can configure paths to be ignored using comma-separated regular expressions in `web.config`:
+
+	<configuration>
+		<appSettings>
+		    <add key="Escc.Redirects.IgnorePaths" value="page[abc].aspx,page[0-9].aspx" />
+	  	</appSettings>
+	</configuration>
+
 # Managing redirects in SQL Server 
 To use the default `SqlServerRedirectMatcher` you need to create a database using the script in `SqlServer.sql` and configure the connection in `web.config`:
 
