@@ -8,6 +8,14 @@ namespace Escc.Redirects
     public class Redirect
     {
         /// <summary>
+        /// Gets or sets the redirect identifier.
+        /// </summary>
+        /// <value>
+        /// The redirect identifier.
+        /// </value>
+        public int RedirectId { get; set; }
+
+        /// <summary>
         /// Gets or sets the HTTP status code to use.
         /// </summary>
         /// <value>

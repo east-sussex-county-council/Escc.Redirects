@@ -59,7 +59,7 @@ namespace Escc.Redirects
 
                 // Try to match the requested URL to a redirect and, if successful, run handlers for the redirect
                 var matchers = new IRedirectMatcher[] {new SqlServerRedirectMatcher()};
-                var handlers = new IRedirectHandler[] {new ConvertToAbsoluteUrlHandler(), new PreserveQueryStringHandler(), new GoToUrlHandler()};
+                var handlers = new IRedirectHandler[] {new ConvertToAbsoluteUrlHandler(), new PreserveQueryStringHandler(), new DebugInfoHandler(), new GoToUrlHandler()};
 
                 foreach (var matcher in matchers)
                 {

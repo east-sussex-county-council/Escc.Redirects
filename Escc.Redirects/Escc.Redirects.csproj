@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConvertToAbsoluteUrlHandler.cs" />
+    <Compile Include="DebugInfoHandler.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GoToUrlHandler.cs" />
     <Compile Include="IRedirectHandler.cs" />

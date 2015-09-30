@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using Dapper;
 
 namespace Escc.Redirects
@@ -33,6 +34,8 @@ namespace Escc.Redirects
                 {
                     while (reader.Read())
                     {
+                        var redirectId = Int32.Parse(reader["RedirectId"].ToString(), CultureInfo.InvariantCulture);
+                        
                         // Get the URL
                         var destinationUrl = new Uri(reader["Destination"].ToString(), UriKind.RelativeOrAbsolute);
 
@@ -43,6 +46,7 @@ namespace Escc.Redirects
                         // Return the redirect
                         return new Redirect()
                         {
+                            RedirectId = redirectId,
                             RequestedUrl = requestedUrl,
                             DestinationUrl = destinationUrl,
                             StatusCode = statusCode
