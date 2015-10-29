@@ -4,6 +4,7 @@ Provide a way to redirect URLs when the original resource is no longer available
 
 - if a URL matches a Microsoft Content Management Server 2002 page, it's not redirected
 - if a URL matches an `*.aspx` file on disk, it's not redirected
+- if a URL is too long for `HostingEnvironment.MapPath` to handle, it's not redirected
 - if a page is missing but a matching redirect is found, the redirect is executed
 - querystrings on URLs are preserved when redirecting, unless the new URL already has a querystring
 - if a page is missing and no matching redirect is found, it falls through to standard IIS/ASP.NET behaviour for 404 responses 

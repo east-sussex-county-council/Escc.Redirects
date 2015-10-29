@@ -37,10 +37,18 @@ namespace Escc.Redirects
         private void RedirectsModule_BeginRequest(object sender, EventArgs e)
         {          
             try
-            {     
-                // If the requested path exists, do nothing
-                if (File.Exists(HostingEnvironment.MapPath(HttpContext.Current.Request.Url.AbsolutePath)))
+            {
+                // If the requested path exists, or it's too long for MapPath to handle, do nothing
+                try
                 {
+                    if (File.Exists(HostingEnvironment.MapPath(HttpContext.Current.Request.Url.AbsolutePath)))
+                    {
+                        return;
+                    }
+                }
+                catch (PathTooLongException)
+                {
+
                     return;
                 }
 
