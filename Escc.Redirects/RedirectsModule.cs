@@ -4,7 +4,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Hosting;
-using Microsoft.ApplicationBlocks.ExceptionManagement;
+using Exceptionless;
 
 namespace Escc.Redirects
 {
@@ -76,7 +76,7 @@ namespace Escc.Redirects
             catch (Exception ex)
             {
                 // If there's a problem, publish the error and continue
-                ExceptionManager.Publish(ex);
+                ex.ToExceptionless().Submit();
             }
         }
     }

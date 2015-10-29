@@ -8,6 +8,10 @@ Provide a way to redirect URLs when the original resource is no longer available
 - querystrings on URLs are preserved when redirecting, unless the new URL already has a querystring
 - if a page is missing and no matching redirect is found, it falls through to standard IIS/ASP.NET behaviour for 404 responses 
 
+Errors are reported to [Exceptionless](https://github.com/exceptionless/Exceptionless).
+
+## Configure the HTTP module
+
 To begin redirecting URLs you need to register the HTTP module in `web.config`. For IIS6 or IIS7+ in Classic mode: 
 
 	<configuration>
