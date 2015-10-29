@@ -1,0 +1,22 @@
+﻿<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+
+  <system.webServer>
+    <modules>
+      <add type="Escc.Redirects.RedirectsModule" xdt:Transform="Remove" xdt:Locator="Match(type)" />
+    </modules>
+  </system.webServer>
+
+  <system.webServer>
+    <modules xdt:Transform="Remove" xdt:Locator="Condition(not(*))" />
+  </system.webServer>
+
+  <system.webServer xdt:Transform="Remove" xdt:Locator="Condition(not(*))" />
+
+  <connectionStrings>
+    <add name="RedirectsReader" xdt:Transform="Remove" xdt:Locator="Match(name)" />
+  </connectionStrings>
+
+  <connectionStrings xdt:Transform="Remove" xdt:Locator="Condition(not(*))" />
+
+</configuration>

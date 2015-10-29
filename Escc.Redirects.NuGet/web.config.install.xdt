@@ -1,0 +1,22 @@
+﻿<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+
+  <system.webServer xdt:Transform="InsertIfMissing" />
+
+  <system.webServer>
+    <modules xdt:Transform="InsertIfMissing" />
+  </system.webServer>
+
+  <system.webServer>
+    <modules>
+      <add name="RedirectsModule" type="Escc.Redirects.RedirectsModule" xdt:Transform="InsertIfMissing" xdt:Locator="Match(type)" />
+    </modules>
+  </system.webServer>
+
+  <connectionStrings xdt:Transform="InsertIfMissing" />
+
+  <connectionStrings>
+    <add name="RedirectsReader" connectionString="" xdt:Transform="InsertIfMissing" xdt:Locator="Match(name)" />
+  </connectionStrings>
+
+</configuration>

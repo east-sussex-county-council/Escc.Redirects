@@ -8,7 +8,7 @@ Provide a way to redirect URLs when the original resource is no longer available
 - querystrings on URLs are preserved when redirecting, unless the new URL already has a querystring
 - if a page is missing and no matching redirect is found, it falls through to standard IIS/ASP.NET behaviour for 404 responses 
 
-Errors are reported to [Exceptionless](https://github.com/exceptionless/Exceptionless).
+Errors are reported to [Exceptionless](https://github.com/exceptionless/Exceptionless). The NuGet package is created using [NuBuild](https://github.com/bspell1/nubuild).
 
 ## Configure the HTTP module
 
