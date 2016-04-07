@@ -70,10 +70,18 @@ namespace Escc.Redirects.Admin.Edit
                 if (!String.IsNullOrEmpty(this.redirectId.Value))
                 {
                     redirect.RedirectId = Int32.Parse(this.redirectId.Value, CultureInfo.InvariantCulture);
+                    if (ConfigurationManager.ConnectionStrings["LegacyRepositoryRedirectsWriter"] != null)
+                    {
+                        new SqlServerRedirectsRepository(ConfigurationManager.ConnectionStrings["LegacyRepositoryRedirectsWriter"].ConnectionString).SaveRedirect(redirect);
+                    }
                     new SqlServerRedirectsRepository(ConfigurationManager.ConnectionStrings["RedirectsWriter"].ConnectionString).SaveRedirect(redirect);
                 }
                 else
                 {
+                    if (ConfigurationManager.ConnectionStrings["LegacyRepositoryRedirectsWriter"] != null)
+                    {
+                        new SqlServerRedirectsRepository(ConfigurationManager.ConnectionStrings["LegacyRepositoryRedirectsWriter"].ConnectionString).SaveRedirect(redirect);
+                    }
                     new SqlServerRedirectsRepository(ConfigurationManager.ConnectionStrings["RedirectsWriter"].ConnectionString).SaveRedirect(redirect);
                 }
 

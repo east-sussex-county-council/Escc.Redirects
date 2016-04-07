@@ -48,6 +48,10 @@ namespace Escc.Redirects.Admin.Edit
 
         protected void Delete_Click(object sender, EventArgs e)
         {
+            if (ConfigurationManager.ConnectionStrings["LegacyRepositoryRedirectsWriter"] != null)
+            {
+                new SqlServerRedirectsRepository(ConfigurationManager.ConnectionStrings["LegacyRepositoryRedirectsWriter"].ConnectionString).DeleteRedirect(Int32.Parse(this.redirectId.Value, CultureInfo.InvariantCulture));
+            }
             new SqlServerRedirectsRepository(ConfigurationManager.ConnectionStrings["RedirectsWriter"].ConnectionString).DeleteRedirect(Int32.Parse(this.redirectId.Value, CultureInfo.InvariantCulture));
 
             // Go back to the list where the redirect was
