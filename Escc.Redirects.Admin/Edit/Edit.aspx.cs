@@ -61,20 +61,20 @@ namespace Escc.Redirects.Admin.Edit
         {
             if (Page.IsValid)
             {
-                var values = new SqlParameter[5];
-                values[0] = new SqlParameter("@pattern", this.pattern.Text);
-                values[1] = new SqlParameter("@destination", this.destination.Text);
-                values[2] = new SqlParameter("@type", this.type.SelectedValue);
-                values[3] = new SqlParameter("@comment", this.comment.Text);
+                var redirect = new Redirect();
+                redirect.RequestedUrl = new Uri(this.pattern.Text, UriKind.RelativeOrAbsolute);
+                redirect.DestinationUrl = new Uri(this.destination.Text, UriKind.RelativeOrAbsolute);
+                redirect.StatusCode = Int32.Parse(this.type.SelectedValue, CultureInfo.InvariantCulture);
+                redirect.Comment = this.comment.Text;
 
                 if (!String.IsNullOrEmpty(this.redirectId.Value))
                 {
-                    values[4] = new SqlParameter("@redirectId", Int32.Parse(this.redirectId.Value, CultureInfo.InvariantCulture));
-                    SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["RedirectsWriter"].ConnectionString, CommandType.StoredProcedure, "usp_Redirect_Update", values);
+                    redirect.RedirectId = Int32.Parse(this.redirectId.Value, CultureInfo.InvariantCulture);
+                    new SqlServerRedirectsRepository(ConfigurationManager.ConnectionStrings["RedirectsWriter"].ConnectionString).SaveRedirect(redirect);
                 }
                 else
                 {
-                    SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["RedirectsWriter"].ConnectionString, CommandType.StoredProcedure, "usp_Redirect_Insert", values);
+                    new SqlServerRedirectsRepository(ConfigurationManager.ConnectionStrings["RedirectsWriter"].ConnectionString).SaveRedirect(redirect);
                 }
 
                 // Go back to the list where the edited redirect will be shown

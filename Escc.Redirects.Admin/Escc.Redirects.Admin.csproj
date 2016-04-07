@@ -15,7 +15,6 @@
     <AssemblyName>Escc.Redirects.Admin</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
-    <AssemblyOriginatorKeyFile>s:\_strong names\esccdev.snk</AssemblyOriginatorKeyFile>
     <SccProjectName>
     </SccProjectName>
     <SccLocalPath>
@@ -55,7 +54,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Escc.ActiveDirectory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=06fad7304560ae6f, processorArchitecture=MSIL">
@@ -130,6 +129,7 @@
       <DependentUpon>Edit.aspx</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IRedirectsRepository.cs" />
     <Compile Include="Moved.aspx.cs">
       <DependentUpon>Moved.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -150,6 +150,7 @@
       <DependentUpon>ShortUrls.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlServerRedirectsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Edit\Web.config" />
@@ -162,6 +163,10 @@
     <ProjectReference Include="..\..\Escc.EastSussexGovUK\Escc.EastSussexGovUK\EsccWebTeam.EastSussexGovUK.csproj">
       <Project>{1426fef0-23dc-4c23-ae15-67f2527bd741}</Project>
       <Name>EsccWebTeam.EastSussexGovUK</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Escc.Redirects\Escc.Redirects.csproj">
+      <Project>{d7a58b81-0d9a-431d-ae46-9390638fb7d5}</Project>
+      <Name>Escc.Redirects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

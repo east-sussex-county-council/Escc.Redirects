@@ -22,7 +22,7 @@ namespace Escc.Redirects
         /// </returns>
         public Redirect HandleRedirect(Redirect redirect)
         {
-            HttpContext.Current.Response.AppendHeader("X-ESCC-Redirect", redirect.RedirectId.ToString(CultureInfo.InvariantCulture));
+            HttpContext.Current.Response.AppendHeader("X-ESCC-Redirect", redirect.RedirectId.ToString());
             return redirect;
         }
     }

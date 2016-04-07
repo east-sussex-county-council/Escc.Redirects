@@ -13,7 +13,7 @@ namespace Escc.Redirects
         /// <value>
         /// The redirect identifier.
         /// </value>
-        public int RedirectId { get; set; }
+        public int? RedirectId { get; set; }
 
         /// <summary>
         /// Gets or sets the HTTP status code to use.
@@ -38,5 +38,13 @@ namespace Escc.Redirects
         /// The destination URL.
         /// </value>
         public Uri DestinationUrl { get; set; }
+
+        /// <summary>
+        /// Gets or sets a comment explaining reason for the redirect.
+        /// </summary>
+        /// <value>
+        /// The comment.
+        /// </value>
+        public string Comment { get; set; }
     }
 }
