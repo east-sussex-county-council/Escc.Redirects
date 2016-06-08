@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escc.Redirects", "Escc.Redirects\Escc.Redirects.csproj", "{D7A58B81-0D9A-431D-AE46-9390638FB7D5}"
 EndProject
@@ -23,8 +23,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escc.Redirects.Admin", "Escc.Redirects.Admin\Escc.Redirects.Admin.csproj", "{E17982AB-C1E7-4501-A30D-E3EF4ABAAC18}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EsccWebTeam.EastSussexGovUK", "..\Escc.EastSussexGovUK\Escc.EastSussexGovUK\EsccWebTeam.EastSussexGovUK.csproj", "{1426FEF0-23DC-4C23-AE15-67F2527BD741}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EsccWebTeam.NavigationControls", "..\Escc.NavigationControls\EsccWebTeam.NavigationControls.csproj", "{0323F668-1723-44A1-8C94-F91DC59EF315}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,10 +54,6 @@ Global
 		{1426FEF0-23DC-4C23-AE15-67F2527BD741}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1426FEF0-23DC-4C23-AE15-67F2527BD741}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1426FEF0-23DC-4C23-AE15-67F2527BD741}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0323F668-1723-44A1-8C94-F91DC59EF315}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0323F668-1723-44A1-8C94-F91DC59EF315}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0323F668-1723-44A1-8C94-F91DC59EF315}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0323F668-1723-44A1-8C94-F91DC59EF315}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
