@@ -1,10 +1,12 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Edit.aspx.cs" Inherits="Escc.Redirects.Admin.Edit.EditPage" %>
 <asp:Content runat="server" ContentPlaceHolderID="metadata">
     <Metadata:MetadataControl runat="server" Title="Add a redirect" IsInSearch="false" DateCreated="2012-02-09" IpsvPreferredTerms="Internet" />
-    <ClientDependency:Css runat="server" Files="FormsSmall" />
+    <ClientDependency:Css runat="server" Files="FormsSmall;ContentSmall" />
     <EastSussexGovUK:ContextContainer runat="server" Desktop="true">
-        <ClientDependency:Css runat="server" Files="FormsMedium" MediaConfiguration="Medium" />
+        <ClientDependency:Css runat="server" Files="FormsMedium;ContentMedium" MediaConfiguration="Medium" />
+        <ClientDependency:Css runat="server" Files="FormsLarge;ContentLarge" MediaConfiguration="Large" />
     </EastSussexGovUK:ContextContainer>
+    <link rel="stylesheet" type="text/css" href="../redirects.css"/>
 </asp:Content>
 
 <asp:Content runat="server" ContentPlaceHolderID="fullScreenHeading"><asp:literal runat="server" id="h1">Add a redirect</asp:literal></asp:Content>
@@ -12,7 +14,7 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="content">
     <div class="full-page">
-        <div class="text">
+        <div class="full-screen-content text-content">
             <div class="form service-form">
                 <FormControls:EsccValidationSummary runat="server" />
                 <input type="hidden" id="redirectId" runat="server" />
@@ -55,5 +57,3 @@
         </div>
     </div>
 </asp:Content>
-
-<asp:Content runat="server" ContentPlaceHolderID="supporting" /> 

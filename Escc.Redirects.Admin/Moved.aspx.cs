@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Xml.Linq;
 using Escc.ActiveDirectory;
 using EsccWebTeam.Data.Web;
+using EsccWebTeam.EastSussexGovUK.MasterPages;
 using Microsoft.ApplicationBlocks.Data;
 
 namespace Escc.Redirects.Admin
@@ -14,6 +15,12 @@ namespace Escc.Redirects.Admin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            var skinnable = Master as BaseMasterPage;
+            if (skinnable != null)
+            {
+                skinnable.Skin = new CustomerFocusSkin(ViewSelector.CurrentViewIs(MasterPageFile));
+            }
+
             var sort = "pattern";
             if (Request.QueryString["sort"] == "destination") sort = "destination";
             if (Request.QueryString["sort"] == "date") sort = "date";

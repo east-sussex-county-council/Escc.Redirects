@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using EsccWebTeam.Data.Web;
+using EsccWebTeam.EastSussexGovUK.MasterPages;
 using Microsoft.ApplicationBlocks.Data;
 
 namespace Escc.Redirects.Admin.Edit
@@ -12,6 +13,12 @@ namespace Escc.Redirects.Admin.Edit
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            var skinnable = Master as BaseMasterPage;
+            if (skinnable != null)
+            {
+                skinnable.Skin = new CustomerFocusSkin(ViewSelector.CurrentViewIs(MasterPageFile));
+            }
+
             if (!IsPostBack && !String.IsNullOrEmpty(Request.QueryString["redirect"]))
             {
                 // Get the redirect id from the querystring

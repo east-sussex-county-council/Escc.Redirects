@@ -7,6 +7,12 @@
     <style>
      .sort * { display: inline; margin-left: .2em; margin-right: .3em; }   
     </style>
+    <ClientDependency:Css runat="server" Files="ContentSmall" />
+    <EastSussexGovUK:ContextContainer runat="server" Desktop="true">
+        <ClientDependency:Css runat="server" Files="ContentMedium" MediaConfiguration="Medium" />
+        <ClientDependency:Css runat="server" Files="ContentLarge" MediaConfiguration="Large" />
+    </EastSussexGovUK:ContextContainer>
+    <link rel="stylesheet" type="text/css" href="redirects.css"/>
 </asp:Content>
 
 <asp:Content runat="server" ContentPlaceHolderID="fullScreenHeading">Short URLs</asp:Content>
@@ -15,11 +21,7 @@
 <asp:Content runat="server" ContentPlaceHolderID="content">
 <div class="full-page">
     <article>
-        <div class="text">
-            <div class="topicNav"><div><div><div>
-                <ul><li><a href="tips.htm">Tips and conventions about Short URLs</a></li></ul>
-            </div></div></div></div>
-
+        <div class="full-screen-content text-content">
             <p>These short URLs should be used for publicity.
                Each one is preceded by &quot;eastsussex.gov.uk/&quot;.</p>
             <p>For example &quot;arts&quot; becomes &quot;eastsussex.gov.uk/arts&quot;.</p>
@@ -79,7 +81,3 @@
         </article>
         </div>
 </asp:Content>
-
-<asp:Content runat="server" ContentPlaceHolderID="atoz" />
-<asp:Content runat="server" ContentPlaceHolderID="feedback" />
-<asp:Content runat="server" ContentPlaceHolderID="supporting" />
