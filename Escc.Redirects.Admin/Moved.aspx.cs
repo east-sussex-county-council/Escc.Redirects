@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web.UI;
 using System.Xml.Linq;
 using Escc.ActiveDirectory;
-using EsccWebTeam.Data.Web;
+using Escc.Web;
 using EsccWebTeam.EastSussexGovUK.MasterPages;
 using Microsoft.ApplicationBlocks.Data;
 
@@ -47,7 +47,7 @@ namespace Escc.Redirects.Admin
 
         protected void AddRedirect_Click(object sender, EventArgs e)
         {
-            Http.Status303SeeOther(new Uri("edit/edit.aspx?type=2", UriKind.Relative));
+            new HttpStatus().SeeOther(new Uri("edit/edit.aspx?type=2", UriKind.Relative));
         }
     }
 }

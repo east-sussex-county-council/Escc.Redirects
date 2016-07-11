@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
-using EsccWebTeam.Data.Web;
+using Escc.Web;
 
 namespace Escc.Redirects
 {
@@ -31,10 +32,10 @@ namespace Escc.Redirects
                 switch (redirect.StatusCode)
                 {
                     case 301:
-                        Http.Status301MovedPermanently(redirect.DestinationUrl);
+                        new HttpStatus().MovedPermanently(redirect.DestinationUrl);
                         break;
                     case 303:
-                        Http.Status303SeeOther(redirect.DestinationUrl);
+                        new HttpStatus().SeeOther(redirect.DestinationUrl);
                         break;
                 }
             }

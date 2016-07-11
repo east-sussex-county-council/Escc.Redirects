@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using EsccWebTeam.Data.Web;
-
 namespace Escc.Redirects
 {
     /// <summary>
@@ -27,7 +25,7 @@ namespace Escc.Redirects
 
             if (!redirect.DestinationUrl.IsAbsoluteUri)
             {
-                redirect.DestinationUrl = Iri.MakeAbsolute(redirect.DestinationUrl, redirect.RequestedUrl, true);
+                redirect.DestinationUrl = new Uri(redirect.RequestedUrl, redirect.DestinationUrl);
             }
             return redirect;
         }

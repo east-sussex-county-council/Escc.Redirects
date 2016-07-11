@@ -3,7 +3,8 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
-using EsccWebTeam.Data.Web;
+using System.Net;
+using Escc.Web;
 using EsccWebTeam.EastSussexGovUK.MasterPages;
 using Microsoft.ApplicationBlocks.Data;
 
@@ -44,13 +45,13 @@ namespace Escc.Redirects.Admin.Edit
             }
             else
             {
-                Http.Status400BadRequest();
+                new HttpStatus().BadRequest();
             }
         }
 
         protected void Edit_Click(object sender, EventArgs e)
         {
-            Http.Status303SeeOther(new Uri("edit.aspx?redirect=" + this.redirectId.Value, UriKind.Relative));
+            new HttpStatus().SeeOther(new Uri("edit.aspx?redirect=" + this.redirectId.Value, UriKind.Relative));
         }
 
         protected void Delete_Click(object sender, EventArgs e)
@@ -61,10 +62,10 @@ namespace Escc.Redirects.Admin.Edit
             switch (this.type.Value)
             {
                 case "1":
-                    Http.Status303SeeOther(new Uri("../shorturls.aspx", UriKind.Relative));
+                    new HttpStatus().SeeOther(new Uri("../shorturls.aspx", UriKind.Relative));
                     break;
                 case "2":
-                    Http.Status303SeeOther(new Uri("../moved.aspx", UriKind.Relative));
+                    new HttpStatus().SeeOther(new Uri("../moved.aspx", UriKind.Relative));
                     break;
             }
         }

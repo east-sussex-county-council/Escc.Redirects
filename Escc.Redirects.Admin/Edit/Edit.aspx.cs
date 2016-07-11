@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Web.UI;
-using EsccWebTeam.Data.Web;
+using Escc.Web;
 using EsccWebTeam.EastSussexGovUK.MasterPages;
 using Microsoft.ApplicationBlocks.Data;
 
@@ -88,10 +88,10 @@ namespace Escc.Redirects.Admin.Edit
                 switch (this.type.SelectedValue)
                 {
                     case "1":
-                        Http.Status303SeeOther(new Uri("../shorturls.aspx", UriKind.Relative));
+                        new HttpStatus().SeeOther(new Uri("../shorturls.aspx", UriKind.Relative));
                         break;
                     case "2":
-                        Http.Status303SeeOther(new Uri("../moved.aspx", UriKind.Relative));
+                        new HttpStatus().SeeOther(new Uri("../moved.aspx", UriKind.Relative));
                         break;
                 }
             }

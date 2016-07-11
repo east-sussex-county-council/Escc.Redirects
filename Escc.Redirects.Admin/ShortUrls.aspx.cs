@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web.UI;
 using System.Xml.Linq;
 using Escc.ActiveDirectory;
-using EsccWebTeam.Data.Web;
+using Escc.Web;
 using Microsoft.ApplicationBlocks.Data;
 
 namespace Escc.Redirects.Admin
@@ -41,7 +41,7 @@ namespace Escc.Redirects.Admin
 
         protected void AddRedirect_Click(object sender, EventArgs e)
         {
-            Http.Status303SeeOther(new Uri("edit/edit.aspx?type=1", UriKind.Relative));
+            new HttpStatus().SeeOther(new Uri("edit/edit.aspx?type=1", UriKind.Relative));
         }
     }
 }
