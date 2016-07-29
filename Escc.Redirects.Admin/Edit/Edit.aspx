@@ -39,10 +39,10 @@
 
                     <div class="formPart">
                         <asp:Label runat="server" AssociatedControlID="destination">Redirect to</asp:Label>
-                        <asp:TextBox runat="server" ID="destination" MaxLength="200" />
+                        <asp:TextBox runat="server" ID="destination" MaxLength="400" />
                     </div>
                     <FormControls:EsccRequiredFieldValidator runat="server" ControlToValidate="destination" ErrorMessage="Please enter the URL to redirect to" />
-                    <FormControls:LengthValidator runat="server" ControlToValidate="destination" MaximumLength="200" ErrorMessage="The URL to redirect to must be 200 characters or fewer" />
+                    <FormControls:LengthValidator runat="server" ControlToValidate="destination" MaximumLength="400" ErrorMessage="The URL to redirect to must be 400 characters or fewer" />
                     <FormControls:UrlValidator runat="server" ControlToValidate="destination" ErrorMessage="The URL to redirect to is not valid" />
 
                     <div class="formPart">
