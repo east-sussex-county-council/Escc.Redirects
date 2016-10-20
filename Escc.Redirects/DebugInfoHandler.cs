@@ -11,7 +11,7 @@ namespace Escc.Redirects
     /// <summary>
     /// Adds debug info to the redirect to make management easier
     /// </summary>
-    class DebugInfoHandler : IRedirectHandler
+    public class DebugInfoHandler : IRedirectHandler
     {
         /// <summary>
         /// Execute the handler, and return an updated redirect

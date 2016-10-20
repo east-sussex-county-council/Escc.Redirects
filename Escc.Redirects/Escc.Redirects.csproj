@@ -90,6 +90,7 @@
     <Compile Include="GoToUrlHandler.cs" />
     <Compile Include="IRedirectHandler.cs" />
     <Compile Include="IRedirectMatcher.cs" />
+    <Compile Include="NotFoundRequestPathResolver.cs" />
     <Compile Include="PreserveQueryStringHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Redirect.cs" />
