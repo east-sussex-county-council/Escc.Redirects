@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Moved.aspx.cs" Inherits="Escc.Redirects.Admin.Moved" EnableViewState="false" %>
+<%@ Import Namespace="Escc.Html" %>
 <asp:Content runat="server" ContentPlaceHolderID="metadata">
 <Metadata:MetadataControl runat="server" 
     Title="Moved pages"
@@ -36,14 +37,14 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                     <tr>
-                        <td title="<%# System.Web.HttpUtility.HtmlEncode("/" + Eval("Pattern").ToString()) %>"><%# System.Web.HttpUtility.HtmlEncode(EsccWebTeam.Data.Web.Iri.ShortenForDisplay(new Uri("/" + Eval("Pattern").ToString(), UriKind.RelativeOrAbsolute), 37)) %></td>
-                        <td><a href="<%# System.Web.HttpUtility.HtmlEncode(Eval("Destination").ToString()) %>" title="<%# System.Web.HttpUtility.HtmlEncode(Eval("Destination").ToString()) %>">
-                                <%# System.Web.HttpUtility.HtmlEncode(EsccWebTeam.Data.Web.Iri.ShortenForDisplay(new Uri(Eval("Destination").ToString(), UriKind.RelativeOrAbsolute), 37))%>
+                        <td title="<%# System.Web.HttpUtility.HtmlEncode("/" + Eval("Pattern").ToString()) %>"><%# HttpUtility.HtmlEncode(new HtmlLinkFormatter().AbbreviateUrl(new Uri("/" + Eval("Pattern"), UriKind.RelativeOrAbsolute), Request.Url, 37)) %></td>
+                        <td><a href="<%# System.Web.HttpUtility.HtmlEncode(Eval("Destination").ToString()) %>" title="<%# HttpUtility.HtmlEncode(Eval("Destination").ToString()) %>">
+                                <%# System.Web.HttpUtility.HtmlEncode(new HtmlLinkFormatter().AbbreviateUrl(new Uri(Eval("Destination").ToString(), UriKind.RelativeOrAbsolute), Request.Url, 37))%>
                              </a>
                          </td>
                         <td><%# System.Web.HttpUtility.HtmlEncode(Eval("Comment").ToString())%></td>
-                        <td><a href="edit/edit.aspx?redirect=<%# System.Web.HttpUtility.HtmlEncode(Eval("RedirectId").ToString()) %>">Edit</a></td>
-                        <td><a href="edit/delete.aspx?redirect=<%# System.Web.HttpUtility.HtmlEncode(Eval("RedirectId").ToString()) %>">Delete</a></td>
+                        <td><a href="edit/edit.aspx?redirect=<%# HttpUtility.HtmlEncode(Eval("RedirectId").ToString()) %>">Edit</a></td>
+                        <td><a href="edit/delete.aspx?redirect=<%# HttpUtility.HtmlEncode(Eval("RedirectId").ToString()) %>">Delete</a></td>
                     </tr>
                 </ItemTemplate>
                 <FooterTemplate>
@@ -60,12 +61,12 @@
                 </HeaderTemplate>
                 <ItemTemplate>
                     <tr>
-                        <td title="<%# System.Web.HttpUtility.HtmlEncode("/" + Eval("Pattern").ToString()) %>"><%# System.Web.HttpUtility.HtmlEncode(EsccWebTeam.Data.Web.Iri.ShortenForDisplay(new Uri("/" + Eval("Pattern").ToString(), UriKind.RelativeOrAbsolute), 37)) %></td>
-                        <td><a href="<%# System.Web.HttpUtility.HtmlEncode(Eval("Destination").ToString()) %>" title="<%# System.Web.HttpUtility.HtmlEncode(Eval("Destination").ToString()) %>">
-                                <%# System.Web.HttpUtility.HtmlEncode(EsccWebTeam.Data.Web.Iri.ShortenForDisplay(new Uri(Eval("Destination").ToString(), UriKind.RelativeOrAbsolute), 37))%>
+                        <td title="<%# HttpUtility.HtmlEncode("/" + Eval("Pattern").ToString()) %>"><%# HttpUtility.HtmlEncode(new HtmlLinkFormatter().AbbreviateUrl(new Uri("/" + Eval("Pattern"), UriKind.RelativeOrAbsolute), Request.Url, 37)) %></td>
+                        <td><a href="<%# HttpUtility.HtmlEncode(Eval("Destination").ToString()) %>" title="<%# HttpUtility.HtmlEncode(Eval("Destination").ToString()) %>">
+                                <%# HttpUtility.HtmlEncode(new HtmlLinkFormatter().AbbreviateUrl(new Uri(Eval("Destination").ToString(), UriKind.RelativeOrAbsolute), Request.Url, 37))%>
                              </a>
                          </td>
-                        <td><%# System.Web.HttpUtility.HtmlEncode(Eval("Comment").ToString())%></td>
+                        <td><%# HttpUtility.HtmlEncode(Eval("Comment").ToString())%></td>
                     </tr>
                 </ItemTemplate>
                 <FooterTemplate>

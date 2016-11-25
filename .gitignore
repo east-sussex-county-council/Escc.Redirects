@@ -37,3 +37,4 @@ packages
 .nuget/NuGet.targets
 *.GhostDoc.xml
 *.dbmdl
+App_Data

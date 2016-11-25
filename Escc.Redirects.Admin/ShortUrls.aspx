@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ShortUrls.aspx.cs" Inherits="Escc.Redirects.Admin.ShortUrls" EnableViewState="false" %>
+<%@ Import Namespace="Escc.Html" %>
 <asp:Content runat="server" ContentPlaceHolderID="metadata">
 <Metadata:MetadataControl runat="server" 
     Title="Short URLs"
@@ -42,7 +43,7 @@
                     <tr>
                         <td title="eastsussex.gov.uk/<%# System.Web.HttpUtility.HtmlEncode(Eval("Pattern").ToString()) %>"><%# System.Web.HttpUtility.HtmlEncode(Eval("Pattern").ToString()) %></td>
                         <td><a href="<%# System.Web.HttpUtility.HtmlEncode(Eval("Destination").ToString()) %>" title="<%# System.Web.HttpUtility.HtmlEncode(Eval("Destination").ToString()) %>">
-                                <%# System.Web.HttpUtility.HtmlEncode(EsccWebTeam.Data.Web.Iri.ShortenForDisplay(new Uri(Eval("Destination").ToString(), UriKind.RelativeOrAbsolute), 55))%>
+                                <%# System.Web.HttpUtility.HtmlEncode(new HtmlLinkFormatter().AbbreviateUrl(new Uri(Eval("Destination").ToString(), UriKind.RelativeOrAbsolute), Request.Url, 55))%>
                              </a>
                         </td>
                         <td><%# System.Web.HttpUtility.HtmlEncode(Eval("Comment").ToString())%></td>
@@ -64,7 +65,7 @@
                     <tr>
                         <td title="eastsussex.gov.uk/<%# System.Web.HttpUtility.HtmlEncode(Eval("Pattern").ToString()) %>"><%# System.Web.HttpUtility.HtmlEncode(Eval("Pattern").ToString()) %></td>
                         <td><a href="<%# System.Web.HttpUtility.HtmlEncode(Eval("Destination").ToString()) %>" title="<%# System.Web.HttpUtility.HtmlEncode(Eval("Destination").ToString()) %>">
-                                <%# System.Web.HttpUtility.HtmlEncode(EsccWebTeam.Data.Web.Iri.ShortenForDisplay(new Uri(Eval("Destination").ToString(), UriKind.RelativeOrAbsolute), 55))%>
+                                <%# System.Web.HttpUtility.HtmlEncode(new HtmlLinkFormatter().AbbreviateUrl(new Uri(Eval("Destination").ToString(), UriKind.RelativeOrAbsolute), Request.Url, 55))%>
                              </a>
                         </td>
                         <td><%# System.Web.HttpUtility.HtmlEncode(Eval("Comment").ToString())%></td>
