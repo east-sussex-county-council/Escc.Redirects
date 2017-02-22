@@ -51,9 +51,23 @@ namespace Escc.Redirects.Admin.MVC.Controllers
 
         public void UpdateDatabase(Redirect redirect, Boolean newEntry)
         {
+            // bug fix
+            // Strip the protocal and domain if entered by the user
+            // Use try catch in case user types in a relative path
+            string absolute = "";
+            try
+            {
+                Uri from = new Uri(redirect.Pattern);
+                absolute = from.AbsolutePath;
+            }
+            catch (Exception)
+            {
+                absolute = redirect.Pattern;
+            }
+
             // Create an array of SqlParameters and populate the data from the passed Redirect Object.
             var values = new SqlParameter[5];
-            values[0] = new SqlParameter("@pattern", redirect.Pattern);
+            values[0] = new SqlParameter("@pattern", absolute);
             values[1] = new SqlParameter("@destination", redirect.Destination);
             values[2] = new SqlParameter("@type", redirect.Type);
             values[3] = new SqlParameter("@comment", redirect.Comment);
