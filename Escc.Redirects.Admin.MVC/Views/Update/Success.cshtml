@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Success Page";
+}
+@model Escc.Redirects.Admin.MVC.Models.Redirect
+
+@{
+    if (Model.RedirectID == 0)
+    {
+        // add
+        <div class="jumbotron alert-success ">
+            <h1>Success!</h1>
+            <p class="lead"> The Redirect for: @Model.Pattern has been created.</p>
+        </div>
+    }
+    else if (Model.Type == 0)
+    {
+        // delete
+        <div class="jumbotron alert-success">
+            <h1>Success!</h1>
+            <p class="lead"> Redirect @Model.RedirectID has been deleted.</p>
+        </div>
+    }
+    else
+    {
+        // edit
+        <div class="jumbotron alert-success">
+            <h1>Success!</h1>
+            <p class="lead">Redirect @Model.RedirectID for: "@Model.Pattern" has been updated.</p>
+        </div>
+    }
+}
+<div class="row">
+    <div class="col-md-4">
+        <h2>Moved Urls</h2>
+        <p><a class="btn btn-info" href="/Home/Moved">View &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Short Urls</h2>
+        <p><a class="btn btn-info" href="/Home/ShortUrls">View &raquo;</a></p>
+    </div>
+</div>

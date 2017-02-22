@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Add Page";
+}
+@model Escc.Redirects.Admin.MVC.Models.Redirect
+
+<div class="jumbotron alert-info">
+    <h1>Add a new Redirect</h1>
+    <p class="lead">Fill in the fields below and click 'Add'</p>
+</div>
+
+<form class="form-horizontal" action="/Update/Add">
+    <fieldset>
+
+        <!-- Select Basic -->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="type">Type</label>
+            <div class="col-md-8">
+                <select id="type" name="type" class="form-control">
+                    @{
+                        if (Model.Type == 1)
+                        {
+                            <option value="1" selected>Short URL</option>
+                            <option value="2">Moved URL</option>
+                        }
+                        else
+                        {
+                            <option value="1">Short URL</option>
+                            <option value="2" selected>Moved URL</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="pattern">Redirect From</label>
+            <div class="col-md-8">
+                <input id="pattern" name="pattern" type="text" placeholder="@Model.Pattern" class="form-control input-md" required="">
+                <span class="help-block">This is where you are</span>
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="destination">Destination</label>
+            <div class="col-md-8">
+                <input id="destination" name="destination" type="text" placeholder="@Model.Destination" class="form-control input-md" required="">
+                <span class="help-block">This is where your going</span>
+            </div>
+        </div>
+
+        <!-- Textarea -->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="comment">Comment</label>
+            <div class="col-md-8">
+                <textarea class="form-control" id="comment" name="comment">@Model.Comment</textarea>
+            </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="submit"></label>
+            <div class="col-md-8">
+                <button type="submit" value="Save" id="submit" name="submit" class="btn btn-success">Add New</button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
