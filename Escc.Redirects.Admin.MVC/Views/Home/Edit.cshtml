@@ -45,7 +45,16 @@
             <label class="col-md-2 control-label" for="pattern">Redirect From</label>
             <div class="col-md-8">
                 <input id="pattern" name="pattern" type="text" value="@Model.Pattern" class="form-control input-md" required="">
-                <span class="help-block">This is where you are</span>
+                @{
+                    if (Model.Type == 1)
+                    {
+                        <span class="help-block">This is the url you want to use</span>
+                    }
+                    else
+                    {
+                        <span class="help-block">This is where you are</span>
+                    }
+                }
             </div>
         </div>
 

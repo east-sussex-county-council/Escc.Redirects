@@ -12,7 +12,6 @@
     <h1>Moved Pages</h1>
     <p class="lead">
         These pages and sections on the eastsussex.gov.uk have moved, but visitors are redirected to the new location.
-        If the page requested by the visitor starts with the previous location shown below, that's enough. It doesn't have to be an exact match.
     </p>
     <p><a class="btn btn-info" href="/Home/Add?Id=2">Add Redirect &raquo;</a></p>
 </div>
@@ -51,5 +50,11 @@
 </div>
 
 <script>
-    $('#contentTable').DataTable();
+    $('#contentTable').DataTable({
+        aLengthMenu: [
+            [10, 25, 50, 100, -1],
+            [10, 25, 50, 100, "All"]
+        ],
+        iDisplayLength: 10
+    });
 </script>

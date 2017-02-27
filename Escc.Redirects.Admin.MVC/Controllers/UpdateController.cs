@@ -1,5 +1,8 @@
 ﻿using Escc.Redirects.Admin.MVC.Models;
+using Microsoft.ApplicationBlocks.Data;
 using System;
+using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Web.Mvc;
 
@@ -22,7 +25,7 @@ namespace Escc.Redirects.Admin.MVC.Controllers
             // Create a null Redirect with the passed ID
             Redirect delete = new Redirect(id, null, 0, null, null);
             // Connect to the database and Delete the Redirect
-            //SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["RedirectsWriter"].ConnectionString, CommandType.StoredProcedure, "usp_Redirect_Delete", new SqlParameter("@redirectId", id));
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["RedirectsWriter"].ConnectionString, CommandType.StoredProcedure, "usp_Redirect_Delete", new SqlParameter("@redirectId", id));
             // Return the Success view and pass it the redirect to display
             return View("Success", delete);
         }
@@ -72,13 +75,13 @@ namespace Escc.Redirects.Admin.MVC.Controllers
                 // add an extra parameter for the ID
                 values[4] = new SqlParameter("@redirectId", redirect.RedirectID);
                 // connect to the database and update the Redirect
-                //SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["RedirectsWriter"].ConnectionString, CommandType.StoredProcedure, "usp_Redirect_Update", values);
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["RedirectsWriter"].ConnectionString, CommandType.StoredProcedure, "usp_Redirect_Update", values);
             }
             // if the redirect is a new redirect
             else
             {
                 // connect to the database and insert the new redirect
-                //SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["RedirectsWriter"].ConnectionString, CommandType.StoredProcedure, "usp_Redirect_Insert", values);
+                SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["RedirectsWriter"].ConnectionString, CommandType.StoredProcedure, "usp_Redirect_Insert", values);
             }
         }
 
