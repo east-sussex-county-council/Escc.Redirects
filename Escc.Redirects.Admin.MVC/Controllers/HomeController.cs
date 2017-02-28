@@ -76,6 +76,7 @@ namespace Escc.Redirects.Admin.MVC.Controllers
         {
             // Create a fresh DataTable
             DataTable table = new DataTable();
+            table.Columns.Add("ID", typeof(int));
             if (type == 1)
             {
                 table.Columns.Add("Short URL", typeof(string));
@@ -97,7 +98,7 @@ namespace Escc.Redirects.Admin.MVC.Controllers
                     // Populate the Datatable
                     HtmlString edit = new HtmlString("<a href=edit?Id=" + reader.GetValue(0) + ">edit</a>");
                     HtmlString delete = new HtmlString("<a href=delete?Id=" + reader.GetValue(0) + ">delete</a>");
-                    table.Rows.Add(reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), edit, delete);
+                    table.Rows.Add(reader.GetValue(0), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), edit, delete);
                 }
             }
             return table;
