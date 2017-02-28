@@ -52,7 +52,7 @@
                     }
                     else
                     {
-                        <span class="help-block">This is where you are</span>
+                        <span class="help-block">This is where you are. For example, for "https://www.eastsussex.gov.uk/alerts" just type "alerts"</span>
                     }
                 }
             </div>
@@ -63,7 +63,7 @@
             <label class="col-md-2 control-label" for="destination">Destination</label>
             <div class="col-md-8">
                 <input id="destination" name="destination" type="text" value="@Model.Destination" class="form-control input-md" required="">
-                <span class="help-block">This is where your going</span>
+                <span class="help-block">This is where your going. Make sure to use the whole URL, for example "https://www.eastsussex.gov.uk/jobs" </span>
             </div>
         </div>
 
@@ -72,6 +72,7 @@
             <label class="col-md-2 control-label" for="comment">Comment</label>
             <div class="col-md-8">
                 <textarea class="form-control" id="comment" name="comment">@Model.Comment</textarea>
+                <span class="help-block">Why has this redirect been added? Who requested it? Who added it?</span>
             </div>
         </div>
 
