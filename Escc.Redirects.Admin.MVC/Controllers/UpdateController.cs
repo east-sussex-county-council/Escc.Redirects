@@ -48,7 +48,7 @@ namespace Escc.Redirects.Admin.MVC.Controllers
 
         public void UpdateDatabase(Redirect redirect, Boolean newEntry)
         {
-            // bug fix
+            // bug fix #1
             // Strip the protocal and domain if entered by the user
             // Use try catch in case user types in a relative path
             string absolute = "";
@@ -61,6 +61,12 @@ namespace Escc.Redirects.Admin.MVC.Controllers
             {
                 absolute = redirect.Pattern;
             }
+
+            // bug fix #2
+            // There can be trouble redirecting using URLs with a trailing /
+            // Use TrimEnd() to remove any trailing / characters from the pattern and destination.
+            absolute = absolute.TrimEnd('/');
+            redirect.Destination = redirect.Destination.TrimEnd('/');
 
             // Create an array of SqlParameters and populate the data from the passed Redirect Object.
             var values = new SqlParameter[5];
