@@ -1,4 +1,5 @@
-﻿using Escc.Redirects.Admin.MVC.Models;
+﻿using Escc.Redirects.Admin.MVC.Authorize;
+using Escc.Redirects.Admin.MVC.Models;
 using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Configuration;
@@ -10,7 +11,7 @@ namespace Escc.Redirects.Admin.MVC.Controllers
 {
     public class UpdateController : Controller
     {
-
+        [CustomAuthorize("Role1,Role2")]
         public ActionResult Edit(int id, int type, string pattern, string destination, string comment)
         {
             // Take the passed parameters and create a Redirect object
@@ -20,6 +21,8 @@ namespace Escc.Redirects.Admin.MVC.Controllers
             // Return the Success view, and pass it the redirect to display
             return View("Success", edit);
         }
+
+        [CustomAuthorize("Role1,Role2")]
         public ActionResult Delete(int id)
         {
             // Create a null Redirect with the passed ID
@@ -30,6 +33,7 @@ namespace Escc.Redirects.Admin.MVC.Controllers
             return View("Success", delete);
         }
 
+        [CustomAuthorize("Role1,Role2")]
         public ActionResult Add(int type, string pattern, string destination, string comment)
         {
             // Take the passed paraneters and create a Redirect Object with a null ID
