@@ -34,7 +34,7 @@ namespace Escc.Redirects.Admin.MVC.Controllers
             return View(table);
         }
 
-        [CustomAuthorize("Role1,Role2")]
+        [CustomAuthorize()]
         public ActionResult Edit(int id)
         {
             // Create a single Redirect
@@ -43,7 +43,7 @@ namespace Escc.Redirects.Admin.MVC.Controllers
             return View(edit);
         }
 
-        [CustomAuthorize("Role1,Role2")]
+        [CustomAuthorize()]
         public ActionResult Delete(int id)
         {
             // Create a single Redirect
@@ -52,7 +52,7 @@ namespace Escc.Redirects.Admin.MVC.Controllers
             return View(delete);
         }
 
-        [CustomAuthorize("Role1,Role2")]
+        [CustomAuthorize()]
         public ActionResult Add(int id)
         {
             // Create a single Redirect with null values

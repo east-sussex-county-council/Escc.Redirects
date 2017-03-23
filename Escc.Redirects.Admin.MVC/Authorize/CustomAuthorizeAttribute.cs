@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Escc.Redirects.Admin.MVC.Authorize
@@ -16,15 +13,9 @@ namespace Escc.Redirects.Admin.MVC.Authorize
         // To authorize specific parts of an MVC site you have to provide the [Authorize} attribute on the controller methods.
         // This class provides a way to use an [Authorize] attribute and still be able to specify roles in the web.config, keeping that data hidden.
 
-        public CustomAuthorizeAttribute(params string[] roleKeys)
+        public CustomAuthorizeAttribute()
         {
-            List<string> roles = new List<string>(roleKeys.Length);
-            var allRoles = (NameValueCollection)ConfigurationManager.GetSection("roles");
-            foreach (var roleKey in roleKeys)
-            {
-                roles.Add(allRoles[roleKey]);
-            }
-            this.Roles = string.Join(",", roles);
+            this.Roles = string.Format("{0},{1}", ConfigurationManager.AppSettings["Role1"], ConfigurationManager.AppSettings["Role2"]);
         }
     }
 }

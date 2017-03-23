@@ -11,7 +11,7 @@ namespace Escc.Redirects.Admin.MVC.Controllers
 {
     public class UpdateController : Controller
     {
-        [CustomAuthorize("Role1,Role2")]
+        [CustomAuthorize()]
         public ActionResult Edit(int id, int type, string pattern, string destination, string comment)
         {
             // Take the passed parameters and create a Redirect object
@@ -22,7 +22,7 @@ namespace Escc.Redirects.Admin.MVC.Controllers
             return View("Success", edit);
         }
 
-        [CustomAuthorize("Role1,Role2")]
+        [CustomAuthorize()]
         public ActionResult Delete(int id)
         {
             // Create a null Redirect with the passed ID
@@ -33,7 +33,7 @@ namespace Escc.Redirects.Admin.MVC.Controllers
             return View("Success", delete);
         }
 
-        [CustomAuthorize("Role1,Role2")]
+        [CustomAuthorize()]
         public ActionResult Add(int type, string pattern, string destination, string comment)
         {
             // Take the passed paraneters and create a Redirect Object with a null ID
