@@ -63,8 +63,8 @@
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ClientDependency.Core, Version=1.9.9.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ClientDependency.1.9.9.2\lib\net45\ClientDependency.Core.dll</HintPath>
+    <Reference Include="ClientDependency.Core, Version=1.9.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClientDependency.1.9.2\lib\net45\ClientDependency.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Dapper, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -88,11 +88,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Escc.ClientDependencyFramework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Escc.ClientDependencyFramework.1.0.8\lib\Escc.ClientDependencyFramework.dll</HintPath>
+      <HintPath>..\packages\Escc.ClientDependencyFramework.2.0.0\lib\Escc.ClientDependencyFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Escc.ClientDependencyFramework.WebForms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=06fad7304560ae6f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Escc.ClientDependencyFramework.WebForms.1.0.2\lib\Escc.ClientDependencyFramework.WebForms.dll</HintPath>
+      <HintPath>..\packages\Escc.ClientDependencyFramework.WebForms.2.1.1\lib\Escc.ClientDependencyFramework.WebForms.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Escc.Dates, Version=1.0.0.0, Culture=neutral, PublicKeyToken=06fad7304560ae6f, processorArchitecture=MSIL">
@@ -100,11 +100,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Escc.EastSussexGovUK, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Escc.EastSussexGovUK.1.0.1\lib\Escc.EastSussexGovUK.dll</HintPath>
+      <HintPath>..\packages\Escc.EastSussexGovUK.1.3.0\lib\Escc.EastSussexGovUK.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Escc.EastSussexGovUK.WebForms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Escc.EastSussexGovUK.WebForms.1.0.2\lib\Escc.EastSussexGovUK.WebForms.dll</HintPath>
+      <HintPath>..\packages\Escc.EastSussexGovUK.WebForms.1.2.1\lib\Escc.EastSussexGovUK.WebForms.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Escc.FormControls.WebForms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=06fad7304560ae6f, processorArchitecture=MSIL">
@@ -128,7 +128,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Escc.Web.Metadata, Version=1.0.0.0, Culture=neutral, PublicKeyToken=06fad7304560ae6f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Escc.Web.Metadata.1.1.2\lib\Escc.Web.Metadata.dll</HintPath>
+      <HintPath>..\packages\Escc.Web.Metadata.1.1.3\lib\Escc.Web.Metadata.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Exceptionless, Version=1.5.2121.0, Culture=neutral, PublicKeyToken=fc181f0a46f65747, processorArchitecture=MSIL">
