@@ -31,7 +31,7 @@ else
             </div>
             <div class="panel-body">
                 <p>@Model.TypeInfoText</p>
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target=".AddRedirectModal">Add Redirect &raquo;</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target=".AddRedirectModal">Add Redirect &raquo;</button>
             </div>
         </div>
     </div>
@@ -39,85 +39,93 @@ else
     <div class="modal fade AddRedirectModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Add Redirect</h4>
-                </div>
-                <div class="modal-body">
-                    @{Html.RenderPartial("~/Views/Partials/_AddRedirect.cshtml", new Redirect(0, null, Model.Type, null, null));}
-                </div>
+                @using (Html.BeginForm("Add", "Update", FormMethod.Post))
+                {
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Add Redirect</h4>
+                    </div>
+                    <div class="modal-body">
+                        @{Html.RenderPartial("~/Views/Partials/_AddRedirect.cshtml", new Redirect(0, null, Model.Type, null, null));}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                            }
             </div>
         </div>
     </div>
 
-                    if (Model.Total > 500)
-                    {
-                        <p></p>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search All @Model.RedirectTypeString</div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    @using (Html.BeginForm("ViewRedirects", "Home", FormMethod.Post))
-                    {
-                                        <div class="form-group">
-                                            <div class="col-md-6 col-md-offset-2">
-                                                @Html.HiddenFor(model => model.Type)
-                                                @Html.TextBoxFor(model => model.Query, new { @placeholder = "e.g. https://www.eastsussex.gov.uk", @class = "form-control" })
-                                            </div>
+                            if (Model.Total > 500)
+                            {
+                                <p></p>
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search All @Model.RedirectTypeString</div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            @using (Html.BeginForm("ViewRedirects", "Home", FormMethod.Post))
+                                            {
+                                                <div class="form-group">
+                                                    <div class="col-md-6 col-md-offset-2">
+                                                        @Html.HiddenFor(model => model.Type)
+                                                        @Html.TextBoxFor(model => model.Query, new { @placeholder = "e.g. https://www.eastsussex.gov.uk", @class = "form-control" })
+                                                    </div>
 
-                                            <div class="col-md-2">
-                                                <input type="submit" class="btn btn-primary" value="Search" />
-                                            </div>
+                                                    <div class="col-md-2">
+                                                        <input type="submit" class="btn btn-primary" value="Search" />
+                                                    </div>
+                                                </div>
+                                            }
                                         </div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    }
-                    if (Model.Alert != "")
-                    {
-                        <p></p>
-                        <div class="alert alert-success" role="alert">@Model.Alert</div>
-                    }
-                    <p></p>
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            @if (Model.Search)
-                            {
-                                <h3 class="panel-title"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> @Model.RedirectTypeString that contain: @Model.Query</h3>
-                            }
-                            else if (!Model.Search && Model.Total > 500)
-                            {
-                                <div class="col-sm-9 col-md-9 col-lg-9">
-                                    <h3 class="panel-title">
-                                        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                                        @Model.RedirectTypeString: [@Model.ShowResultsFrom - @(@Model.ShowResultsFrom + 500)] out of: @Model.Total
-                                    </h3>
-                                </div>
-                                <div class="btn-toolbar">
-                                    <div class="btn-group">
-                                        @Html.RouteLink("<<<", "ViewRedirects", new { Type = Model.Type, ShowResultsFrom = 0 }, new { @class = "btn btn-default" })
-                                        @Html.RouteLink("<<500", "ViewRedirects", new { Type = Model.Type, ShowResultsFrom = Model.ShowResultsFrom - 500 }, new { @class = "btn btn-default" })
-                                        @Html.RouteLink("500>>", "ViewRedirects", new { Type = Model.Type, ShowResultsFrom = Model.ShowResultsFrom + 500 }, new { @class = "btn btn-default" })
-                                        @Html.RouteLink(">>>", "ViewRedirects", new { Type = Model.Type, ShowResultsFrom = Model.Total - 500 }, new { @class = "btn btn-default" })
                                     </div>
                                 </div>
                             }
-                            else
+                            if (Model.Alert != "")
                             {
-                                <h3 class="panel-title"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> @Model.RedirectTypeString:</h3>
+                                <p></p>
+                                <div class="alert alert-success" role="alert">@Model.Alert</div>
                             }
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-12 col-lg-12">
-                                    <p></p>
-                                    @{Html.RenderPartial("~/Views/Partials/_DataTable.cshtml", Model.RedirectsTable);}
+                            <p></p>
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    @if (Model.Search)
+                                    {
+                                        <h3 class="panel-title"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> @Model.RedirectTypeString that contain: @Model.Query</h3>
+                                    }
+                                    else if (!Model.Search && Model.Total > 500)
+                                    {
+                                        <div class="col-sm-9 col-md-9 col-lg-9">
+                                            <h3 class="panel-title">
+                                                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                                                @Model.RedirectTypeString: [@Model.ShowResultsFrom - @(@Model.ShowResultsFrom + 500)] out of: @Model.Total
+                                            </h3>
+                                        </div>
+                                        <div class="btn-toolbar">
+                                            <div class="btn-group">
+                                                @Html.RouteLink("<<<", "ViewRedirects", new { Type = Model.Type, ShowResultsFrom = 0 }, new { @class = "btn btn-default" })
+                                                @Html.RouteLink("<<500", "ViewRedirects", new { Type = Model.Type, ShowResultsFrom = Model.ShowResultsFrom - 500 }, new { @class = "btn btn-default" })
+                                                @Html.RouteLink("500>>", "ViewRedirects", new { Type = Model.Type, ShowResultsFrom = Model.ShowResultsFrom + 500 }, new { @class = "btn btn-default" })
+                                                @Html.RouteLink(">>>", "ViewRedirects", new { Type = Model.Type, ShowResultsFrom = Model.Total - 500 }, new { @class = "btn btn-default" })
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <h3 class="panel-title"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> @Model.RedirectTypeString:</h3>
+                                    }
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12 col-lg-12">
+                                            <p></p>
+                                            @{Html.RenderPartial("~/Views/Partials/_DataTable.cshtml", Model.RedirectsTable);}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                                        }
+                                                }
+
 
 @foreach (DataRow Row in Model.RedirectsTable.Table.Rows)
 {
@@ -127,28 +135,41 @@ else
     <div class="modal fade @Edit" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Edit Redirect</h4>
-                </div>
-                <div class="modal-body">
-                    @{Html.RenderPartial("~/Views/Partials/_EditRedirect.cshtml", new Redirect((int)Row["ID"], Row["URL"].ToString(), Model.Type, Row["Comment"].ToString(), Row["Destination"].ToString()));}
-                </div>
+                @using (Html.BeginForm("Edit", "Update", FormMethod.Post))
+                {
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Edit Redirect</h4>
+                    </div>
+                    <div class="modal-body">
+                        @{Html.RenderPartial("~/Views/Partials/_EditRedirect.cshtml", new Redirect((int)Row["ID"], Row["URL"].ToString(), Model.Type, Row["Comment"].ToString(), Row["Destination"].ToString()));}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-warning">Update</button>
+                    </div>
+                            }
             </div>
         </div>
     </div>
-
     <div class="modal fade @Delete" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Delete Redirect</h4>
-                </div>
-                <div class="modal-body">
-                    @{Html.RenderPartial("~/Views/Partials/_DeleteRedirect.cshtml", new Redirect((int)Row["ID"], Row["URL"].ToString(), Model.Type, Row["Comment"].ToString(), Row["Destination"].ToString()));}
-                </div>
+                @using (Html.BeginForm("Delete", "Update", FormMethod.Post))
+                {
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Delete Redirect</h4>
+                    </div>
+                    <div class="modal-body">
+                        @{Html.RenderPartial("~/Views/Partials/_DeleteRedirect.cshtml", new Redirect((int)Row["ID"], Row["URL"].ToString(), Model.Type, Row["Comment"].ToString(), Row["Destination"].ToString()));}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </div>
+                            }
             </div>
         </div>
     </div>
-                        }
+                            }

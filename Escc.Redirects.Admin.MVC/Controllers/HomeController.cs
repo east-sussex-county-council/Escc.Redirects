@@ -118,8 +118,8 @@ namespace Escc.Redirects.Admin.MVC.Controllers
                 foreach (var model in ResultsToShow)
                 {
                     // Populate the Datatable
-                    var edit = new HtmlString(string.Format("<button type=\"button\" class=\"btn btn-primary btn-sm\" data-toggle=\"modal\" data-target=\".{0}\">Edit</button>", string.Format("Edit{0}",model.ID)));
-                    var delete = new HtmlString(string.Format("<button type=\"button\" class=\"btn btn-primary btn-sm\" data-toggle=\"modal\" data-target=\".{0}\">Delete</button>", string.Format("Delete{0}", model.ID)));
+                    var edit = new HtmlString(string.Format("<button type=\"button\" class=\"btn btn-warning btn-sm\" data-toggle=\"modal\" data-target=\".{0}\">Edit</button>", string.Format("Edit{0}",model.ID)));
+                    var delete = new HtmlString(string.Format("<button type=\"button\" class=\"btn btn-danger btn-sm\" data-toggle=\"modal\" data-target=\".{0}\">Delete</button>", string.Format("Delete{0}", model.ID)));
                     table.Rows.Add(model.ID, model.URL, model.Destination, model.Comment, edit, delete);
                 }
 
@@ -132,8 +132,8 @@ namespace Escc.Redirects.Admin.MVC.Controllers
                     if(model.Destination.ToLower().Contains(Query.ToLower()) || model.URL.ToLower().Contains(Query.ToLower()))
                     {
                         // Populate the Datatable
-                        var edit = new HtmlString(string.Format("<button type=\"button\" class=\"btn btn-primary btn-sm\" data-toggle=\"modal\" data-target=\".{0}\">Edit</button>", string.Format("Edit{0}", model.ID)));
-                        var delete = new HtmlString(string.Format("<button type=\"button\" class=\"btn btn-primary btn-sm\" data-toggle=\"modal\" data-target=\".{0}\">Delete</button>", string.Format("Delete{0}", model.ID)));
+                        var edit = new HtmlString(string.Format("<button type=\"button\" class=\"btn btn-warning btn-sm\" data-toggle=\"modal\" data-target=\".{0}\">Edit</button>", string.Format("Edit{0}", model.ID)));
+                        var delete = new HtmlString(string.Format("<button type=\"button\" class=\"btn btn-danger btn-sm\" data-toggle=\"modal\" data-target=\".{0}\">Delete</button>", string.Format("Delete{0}", model.ID)));
                         table.Rows.Add(model.ID, model.URL, model.Destination, model.Comment, edit, delete);
                     }
                 }
