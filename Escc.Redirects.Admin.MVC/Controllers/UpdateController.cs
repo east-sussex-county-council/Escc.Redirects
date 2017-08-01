@@ -12,42 +12,35 @@ namespace Escc.Redirects.Admin.MVC.Controllers
     public class UpdateController : Controller
     {
         [CustomAuthorize()]
-        public ActionResult Edit(int id, int type, string pattern, string destination, string comment)
+        public ActionResult Edit(int RedirectID, int Type, string Pattern, string Destination, string Comment)
         {
             // Take the passed parameters and create a Redirect object
-            Redirect edit = new Redirect(id, pattern, type, comment, destination);
+            Redirect edit = new Redirect(RedirectID, Pattern, Type, Comment, Destination);
             // pass the redirect to the updateDatabase method, and specify false that it is not a new redirect
             UpdateDatabase(edit, false);
             // Return the Success view, and pass it the redirect to display
-            return View("Success", edit);
+            return RedirectToRoute("ViewRedirects", new { Type = Type, Alert = string.Format("Redirect {0} for: \"{1}\" has been updated.", RedirectID, Pattern) });
         }
 
         [CustomAuthorize()]
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int Type, int RedirectID, string Pattern)
         {
             // Create a null Redirect with the passed ID
-            Redirect delete = new Redirect(id, null, 0, null, null);
+            Redirect delete = new Redirect(RedirectID, null, 0, null, null);
             // Connect to the database and Delete the Redirect
-            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["RedirectsWriter"].ConnectionString, CommandType.StoredProcedure, "usp_Redirect_Delete", new SqlParameter("@redirectId", id));
+            SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["RedirectsWriter"].ConnectionString, CommandType.StoredProcedure, "usp_Redirect_Delete", new SqlParameter("@redirectId", RedirectID));
             // Return the Success view and pass it the redirect to display
-            return View("Success", delete);
+            return RedirectToRoute("ViewRedirects", new { Type = Type, Alert = string.Format("Redirect {0} for: \"{1}\" has been deleted.", RedirectID, Pattern) });
         }
 
         [CustomAuthorize()]
-        public ActionResult Add(int type, string pattern, string destination, string comment)
+        public ActionResult Add(int Type, string Pattern, string Destination, string Comment)
         {
             // Take the passed paraneters and create a Redirect Object with a null ID
-            Redirect add = new Redirect(0, pattern, type, comment, destination);
+            Redirect add = new Redirect(0, Pattern, Type, Comment, Destination);
             // pass the redirect to the UpdateDatabase method and specify true that it is a new redirect
             UpdateDatabase(add, true);
-            // Return the Success view and pass it the redirect to display
-            return View("Success", add);
-        }
-
-        public ActionResult Success()
-        {
-            // Return the Success view
-            return View();
+            return RedirectToRoute("ViewRedirects", new {Type = Type, Alert = string.Format("The Redirect for: {0} has been created.", Pattern) });
         }
 
         public void UpdateDatabase(Redirect redirect, Boolean newEntry)

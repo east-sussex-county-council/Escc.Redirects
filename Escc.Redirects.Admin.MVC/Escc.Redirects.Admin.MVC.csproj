@@ -166,7 +166,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataModels\TableModel.cs" />
+    <Compile Include="Models\DataModels\TableRedirectModel.cs" />
     <Compile Include="Models\Redirect.cs" />
+    <Compile Include="Models\ViewModels\RedirectsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -425,12 +428,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Moved.cshtml" />
-    <Content Include="Views\Home\Delete.cshtml" />
-    <Content Include="Views\Home\Edit.cshtml" />
-    <Content Include="Views\Home\ShortUrls.cshtml" />
-    <Content Include="Views\Home\Add.cshtml" />
-    <Content Include="Views\Update\Success.cshtml" />
     <Content Include="Web.example.config" />
     <Content Include="Web.example.Debug.config">
       <DependentUpon>Web.example.config</DependentUpon>
@@ -439,6 +436,11 @@
       <DependentUpon>Web.example.config</DependentUpon>
     </Content>
     <Content Include="Web.config" />
+    <Content Include="Views\Partials\_DataTable.cshtml" />
+    <Content Include="Views\Home\ViewRedirects.cshtml" />
+    <Content Include="Views\Partials\_AddRedirect.cshtml" />
+    <Content Include="Views\Partials\_EditRedirect.cshtml" />
+    <Content Include="Views\Partials\_DeleteRedirect.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

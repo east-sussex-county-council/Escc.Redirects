@@ -23,8 +23,8 @@
             <div class="navbar-custom navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Moved", "Moved", "Home")</li>
-                    <li>@Html.ActionLink("ShortUrls", "ShortUrls", "Home")</li>
+                    <li>@Html.RouteLink("Moved", "ViewRedirects", new { Type = 2 }, new { })</li>
+                    <li>@Html.RouteLink("ShortUrls", "ViewRedirects", new { Type = 1 }, new { })</li>
                 </ul>
                 <p class="nav navbar-text navbar-right">Hello Web Editor!</p>
 
@@ -35,7 +35,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p> <a href="https://www.eastsussex.gov.uk/"> <img src="~/Content/logo-small.gif" alt="ESCC"> </a> &copy; @DateTime.Now.Year - Cai Lehwald - Escc.Redirects.Admin</p>
+            <p> <a href="https://www.eastsussex.gov.uk/"> <img src="~/Content/logo-small.gif" alt="ESCC"> </a> &copy; @DateTime.Now.Year - East Sussex County Council - Escc.Redirects.Admin</p>
         </footer>
     </div>
     @Scripts.Render("~/bundles/bootstrap")

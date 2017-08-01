@@ -1,0 +1,54 @@
+﻿
+@model Escc.Redirects.Admin.MVC.Models.DataModels.TableModel
+@using System.Data
+
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+<link href="~/Content/DataTables/css/jquery.dataTables.css" rel="stylesheet" />
+<script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+
+<div class="dt-rowReorder-noOverflow">
+    <div class="table-responsive well">
+        <table class="table table-bordered" cellspacing="0" id="@Model.ID">
+            <thead>
+                <tr>
+                    @foreach (DataColumn col in Model.Table.Columns)
+                    {
+                        <th>@col.ColumnName</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DataRow row in Model.Table.Rows)
+                {
+                    <tr>
+                        @foreach (DataColumn col in Model.Table.Columns)
+                        {
+                            <td>@row[col.ColumnName]</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    $('#@Model.ID').DataTable({
+        aLengthMenu: [
+            [10, 25, 50, 100, -1],
+            [10, 25, 50, 100, "All"]
+        ],
+        iDisplayLength: 10,
+        "order": [[0, "asc"]]
+    });
+</script>
+<style>
+  td:nth-child(2), td:nth-child(3) {
+        word-wrap: break-word;
+        word-break: break-all;
+        white-space: normal;
+    }
+   td:nth-child(4) {
+        word-wrap: break-word;
+        white-space: normal;
+    }
+</style>

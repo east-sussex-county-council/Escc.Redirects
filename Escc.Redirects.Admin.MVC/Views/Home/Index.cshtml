@@ -4,23 +4,44 @@
 
 <div class="jumbotron alert-info">
     <h1>Welcome to Escc.Redirects.Admin</h1>
-    <p class="lead">Redesigned with MVC and Bootstrap</p>
+    <p class="lead">Designed with MVC 5 and Bootstrap 3</p>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Moved Urls</h2>
-        <p>Redirects for old pages and sections which have moved. Includes some retired short URLs.</p>
-        <p><a class="btn btn-info" href="~/Home/Moved">View &raquo;</a></p>
+
+    <div class="col-sm-4 col-md-4 col-lg-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Moved Urls</h3>
+            </div>
+            <div class="panel-body">
+                <p>  Redirects for old pages and sections which have moved. Includes some retired short URLs.</p>
+                @Html.RouteLink("View", "ViewRedirects", new {Type = 2 }, new { @class = "btn btn-info" })
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Short Urls</h2>
-        <p>Short URLs which should be used for publicity.</p>
-        <p><a class="btn btn-info" href="~/Home/ShortUrls">View &raquo;</a></p>
+
+    <div class="col-sm-4 col-md-4 col-lg-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Short Urls</h3>
+            </div>
+            <div class="panel-body">
+                <p> Short URLs which should be used for publicity.</p>
+                @Html.RouteLink("View", "ViewRedirects", new { Type = 1 }, new { @class = "btn btn-info" })
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Go back</h2>
-        <p>To go back to the 'manage website' page, click here</p>
-        <p><a class="btn btn-info" href="https://webcontent/managewebsite/">Go Back &raquo;</a></p>
+
+    <div class="col-sm-4 col-md-4 col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Go back</h3>
+            </div>
+            <div class="panel-body">
+                <p>To go back to the 'manage website' page, click here</p>
+                <p><a class="btn btn-info" href="https://webcontent/managewebsite/">Go Back &raquo;</a></p>
+            </div>
+        </div>
     </div>
 </div>

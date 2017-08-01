@@ -1,10 +1,14 @@
 ﻿using Escc.Redirects.Admin.MVC.Authorize;
 using Escc.Redirects.Admin.MVC.Models;
+using Escc.Redirects.Admin.MVC.Models.DataModels;
+using Escc.Redirects.Admin.MVC.Models.ViewModels;
 using Microsoft.ApplicationBlocks.Data;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -18,47 +22,57 @@ namespace Escc.Redirects.Admin.MVC.Controllers
             return View();
         }
 
-        public ActionResult ShortUrls()
-        {
-            // Create and populate a Datatable
-            DataTable table = GetRedirectsTable(1);
-            // Return the ShortUrls view and pass it the table
-            return View(table);
-        }
-
-        public ActionResult Moved()
-        {
-            // Create and populate a Datatable
-            DataTable table = GetRedirectsTable(2);
-            // Return the Moved view and pass it the table
-            return View(table);
-        }
-
         [CustomAuthorize()]
-        public ActionResult Edit(int id)
+        [Route("ViewRedirects", Name = "ViewRedirects")]
+        public ActionResult ViewRedirects(int Type, int ShowResultsFrom = 0, string Query = "Null", string Alert = "")
         {
-            // Create a single Redirect
-            Redirect edit = GetRedirect(id);
-            // Return the Edit view and pass it the redirect
-            return View(edit);
-        }
+            var model = new RedirectsViewModel();
 
-        [CustomAuthorize()]
-        public ActionResult Delete(int id)
-        {
-            // Create a single Redirect
-            Redirect delete = GetRedirect(id);
-            // Return the Delete view and pass it the redirect
-            return View(delete);
-        }
+            if(Query != "Null")
+            {
+                model.Search = true;
+                model.Query = Query;
+            }
+            else
+            {
+                model.Total = GetTotalRedirects(Type);
+            }
 
-        [CustomAuthorize()]
-        public ActionResult Add(int id)
-        {
-            // Create a single Redirect with null values
-            Redirect add = new Redirect(0, null, id, null, null);
-            // Return the Add view and pass it the null Redirect
-            return View(add);
+            if (ShowResultsFrom < 0)
+            {
+                ShowResultsFrom = 0;
+            }
+            else if (ShowResultsFrom > model.Total)
+            {
+                ShowResultsFrom = model.Total - 500;
+            }
+
+            model.Alert = Alert;
+            model.ShowResultsFrom = ShowResultsFrom;
+            model.Type = Type;
+            switch (Type)
+            {
+                case 1:
+                    model.RedirectTypeString = "Short Urls";
+                    model.TypeInfoText = "These short URLs should be used for publicity. Each one is preceded by \"eastsussex.gov.uk / \". For example \"arts\" becomes \"eastsussex.gov.uk/arts\".";
+                    break;
+                case 2:
+                    model.RedirectTypeString = "Moved Urls";
+                    model.TypeInfoText = " These pages and sections on eastsussex.gov.uk have moved, but visitors are redirected to the new location.";
+                    break;
+            }
+
+            try
+            {
+                model.RedirectsTable.Table = GetRedirectsTable(Type, ShowResultsFrom, Query);
+            }
+            catch (Exception error)
+            {
+                model.ErrorMessage = error.Message;
+                throw;
+            }
+  
+            return View(model);
         }
 
         public Redirect GetRedirect(int id)
@@ -76,38 +90,69 @@ namespace Escc.Redirects.Admin.MVC.Controllers
             return redirect;
         }
 
-        public DataTable GetRedirectsTable(int type)
+        public DataTable GetRedirectsTable(int Type, int ShowResultsFrom = 0, string Query = "Null")
         {
             // Create a fresh DataTable
             DataTable table = new DataTable();
             table.Columns.Add("ID", typeof(int));
-            if (type == 1)
-            {
-                table.Columns.Add("Short URL", typeof(string));
-            }
-            else
-            {
-                table.Columns.Add("Moved URL", typeof(string));
-            }
-            table.Columns.Add("Redirects To", typeof(string));
+            table.Columns.Add("URL", typeof(string));
+            table.Columns.Add("Destination", typeof(string));
             table.Columns.Add("Comment", typeof(string));
             table.Columns.Add("Edit", typeof(HtmlString));
             table.Columns.Add("Delete", typeof(HtmlString));
 
+            var ResultsList = new List<TableRedirectModel>();
             // Connect to the Database using the usp_Redirect_SelectByType stored procedure and passing the redirect type
-            using (var reader = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["RedirectsReader"].ConnectionString, "usp_Redirect_SelectByType", new SqlParameter("@type", type), new SqlParameter("@sort", "pattern")))
+            using (var reader = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["RedirectsReader"].ConnectionString, "usp_Redirect_SelectByType", new SqlParameter("@type", Type), new SqlParameter("@sort", "pattern")))
             {
                 while (reader.Read())
                 {
+                    ResultsList.Add(new TableRedirectModel(int.Parse(reader.GetValue(0).ToString()), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString()));
+                }
+            }
+            if(Query == "Null")
+            {
+                ResultsList = ResultsList.OrderBy(x => x.ID).ToList();
+                ResultsList.RemoveRange(0, ShowResultsFrom);
+                var ResultsToShow = ResultsList.Take(500);
+                foreach (var model in ResultsToShow)
+                {
                     // Populate the Datatable
-                    HtmlString edit = new HtmlString("<a href=edit?Id=" + reader.GetValue(0) + ">edit</a>");
-                    HtmlString delete = new HtmlString("<a href=delete?Id=" + reader.GetValue(0) + ">delete</a>");
-                    table.Rows.Add(reader.GetValue(0), reader.GetValue(1).ToString(), reader.GetValue(2).ToString(), reader.GetValue(3).ToString(), edit, delete);
+                    var edit = new HtmlString(string.Format("<button type=\"button\" class=\"btn btn-primary btn-sm\" data-toggle=\"modal\" data-target=\".{0}\">Edit</button>", string.Format("Edit{0}",model.ID)));
+                    var delete = new HtmlString(string.Format("<button type=\"button\" class=\"btn btn-primary btn-sm\" data-toggle=\"modal\" data-target=\".{0}\">Delete</button>", string.Format("Delete{0}", model.ID)));
+                    table.Rows.Add(model.ID, model.URL, model.Destination, model.Comment, edit, delete);
+                }
+
+            }
+            else
+            {
+                ResultsList = ResultsList.OrderBy(x => x.ID).ToList();
+                foreach (var model in ResultsList)
+                {
+                    if(model.Destination.ToLower().Contains(Query.ToLower()) || model.URL.ToLower().Contains(Query.ToLower()))
+                    {
+                        // Populate the Datatable
+                        var edit = new HtmlString(string.Format("<button type=\"button\" class=\"btn btn-primary btn-sm\" data-toggle=\"modal\" data-target=\".{0}\">Edit</button>", string.Format("Edit{0}", model.ID)));
+                        var delete = new HtmlString(string.Format("<button type=\"button\" class=\"btn btn-primary btn-sm\" data-toggle=\"modal\" data-target=\".{0}\">Delete</button>", string.Format("Delete{0}", model.ID)));
+                        table.Rows.Add(model.ID, model.URL, model.Destination, model.Comment, edit, delete);
+                    }
                 }
             }
             return table;
         }
 
-
+        public int GetTotalRedirects(int Type)
+        {
+            var Total = 0;
+            // Connect to the Database using the usp_Redirect_SelectByType stored procedure and passing the redirect type
+            using (var reader = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["RedirectsReader"].ConnectionString, "usp_Redirect_SelectByType", new SqlParameter("@type", Type), new SqlParameter("@sort", "pattern")))
+            {
+                while (reader.Read())
+                {
+                    Total++;
+                }
+            }
+            return Total;
+        }
     }
 }
