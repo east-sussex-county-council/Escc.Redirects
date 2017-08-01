@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Redirects Page";
 }
-@using Escc.Redirects.Admin.MVC.Models;
+@using Escc.Redirects.Admin.MVC.Models.DataModels;
 @using System.Data;
 @model Escc.Redirects.Admin.MVC.Models.ViewModels.RedirectsViewModel
 <head>
@@ -46,7 +46,7 @@ else
                         <h4 class="modal-title">Add Redirect</h4>
                     </div>
                     <div class="modal-body">
-                        @{Html.RenderPartial("~/Views/Partials/_AddRedirect.cshtml", new Redirect(0, null, Model.Type, null, null));}
+                        @{Html.RenderPartial("~/Views/Partials/_AddRedirect.cshtml", new RedirectModel(0, null, Model.Type, null, null));}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -142,7 +142,7 @@ else
                         <h4 class="modal-title">Edit Redirect</h4>
                     </div>
                     <div class="modal-body">
-                        @{Html.RenderPartial("~/Views/Partials/_EditRedirect.cshtml", new Redirect((int)Row["ID"], Row["URL"].ToString(), Model.Type, Row["Comment"].ToString(), Row["Destination"].ToString()));}
+                        @{Html.RenderPartial("~/Views/Partials/_EditRedirect.cshtml", new RedirectModel((int)Row["ID"], Row["URL"].ToString(), Model.Type, Row["Comment"].ToString(), Row["Destination"].ToString()));}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -162,7 +162,7 @@ else
                         <h4 class="modal-title">Delete Redirect</h4>
                     </div>
                     <div class="modal-body">
-                        @{Html.RenderPartial("~/Views/Partials/_DeleteRedirect.cshtml", new Redirect((int)Row["ID"], Row["URL"].ToString(), Model.Type, Row["Comment"].ToString(), Row["Destination"].ToString()));}
+                        @{Html.RenderPartial("~/Views/Partials/_DeleteRedirect.cshtml", new RedirectModel((int)Row["ID"], Row["URL"].ToString(), Model.Type, Row["Comment"].ToString(), Row["Destination"].ToString()));}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

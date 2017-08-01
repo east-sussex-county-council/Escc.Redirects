@@ -1,5 +1,4 @@
 ﻿using Escc.Redirects.Admin.MVC.Authorize;
-using Escc.Redirects.Admin.MVC.Models;
 using Escc.Redirects.Admin.MVC.Models.DataModels;
 using Escc.Redirects.Admin.MVC.Models.ViewModels;
 using Microsoft.ApplicationBlocks.Data;
@@ -75,16 +74,16 @@ namespace Escc.Redirects.Admin.MVC.Controllers
             return View(model);
         }
 
-        public Redirect GetRedirect(int id)
+        public RedirectModel GetRedirect(int id)
         {
             // Create a new null Redirect
-            Redirect redirect = new Redirect(0, null, 0, null, null);
+            RedirectModel redirect = new RedirectModel(0, null, 0, null, null);
             // Connect to the Database and use the usp_Redirect_Select stored procedure and id to get a single Redirect.
             using (var reader = SqlHelper.ExecuteReader(ConfigurationManager.ConnectionStrings["RedirectsWriter"].ConnectionString, CommandType.StoredProcedure, "usp_Redirect_Select", new SqlParameter("@redirectId", id)))
             {
                 while (reader.Read())
                 {
-                    redirect = new Redirect(Int32.Parse(reader["RedirectId"].ToString()), reader["Pattern"].ToString(), Int32.Parse(reader["Type"].ToString()), reader["Comment"].ToString(), reader["Destination"].ToString());
+                    redirect = new RedirectModel(Int32.Parse(reader["RedirectId"].ToString()), reader["Pattern"].ToString(), Int32.Parse(reader["Type"].ToString()), reader["Comment"].ToString(), reader["Destination"].ToString());
                 }
             }
             return redirect;

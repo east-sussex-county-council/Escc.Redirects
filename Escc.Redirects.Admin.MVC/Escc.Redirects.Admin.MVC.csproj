@@ -168,7 +168,7 @@
     </Compile>
     <Compile Include="Models\DataModels\TableModel.cs" />
     <Compile Include="Models\DataModels\TableRedirectModel.cs" />
-    <Compile Include="Models\Redirect.cs" />
+    <Compile Include="Models\DataModels\RedirectModel.cs" />
     <Compile Include="Models\ViewModels\RedirectsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿using Escc.Redirects.Admin.MVC.Authorize;
-using Escc.Redirects.Admin.MVC.Models;
+using Escc.Redirects.Admin.MVC.Models.DataModels;
 using Microsoft.ApplicationBlocks.Data;
 using System;
 using System.Configuration;
@@ -15,7 +15,7 @@ namespace Escc.Redirects.Admin.MVC.Controllers
         public ActionResult Edit(int RedirectID, int Type, string Pattern, string Destination, string Comment)
         {
             // Take the passed parameters and create a Redirect object
-            Redirect edit = new Redirect(RedirectID, Pattern, Type, Comment, Destination);
+            RedirectModel edit = new RedirectModel(RedirectID, Pattern, Type, Comment, Destination);
             // pass the redirect to the updateDatabase method, and specify false that it is not a new redirect
             UpdateDatabase(edit, false);
             // Return the Success view, and pass it the redirect to display
@@ -26,7 +26,7 @@ namespace Escc.Redirects.Admin.MVC.Controllers
         public ActionResult Delete(int Type, int RedirectID, string Pattern)
         {
             // Create a null Redirect with the passed ID
-            Redirect delete = new Redirect(RedirectID, null, 0, null, null);
+            RedirectModel delete = new RedirectModel(RedirectID, null, 0, null, null);
             // Connect to the database and Delete the Redirect
             SqlHelper.ExecuteNonQuery(ConfigurationManager.ConnectionStrings["RedirectsWriter"].ConnectionString, CommandType.StoredProcedure, "usp_Redirect_Delete", new SqlParameter("@redirectId", RedirectID));
             // Return the Success view and pass it the redirect to display
@@ -37,13 +37,13 @@ namespace Escc.Redirects.Admin.MVC.Controllers
         public ActionResult Add(int Type, string Pattern, string Destination, string Comment)
         {
             // Take the passed paraneters and create a Redirect Object with a null ID
-            Redirect add = new Redirect(0, Pattern, Type, Comment, Destination);
+            RedirectModel add = new RedirectModel(0, Pattern, Type, Comment, Destination);
             // pass the redirect to the UpdateDatabase method and specify true that it is a new redirect
             UpdateDatabase(add, true);
             return RedirectToRoute("ViewRedirects", new {Type = Type, Alert = string.Format("The Redirect for: {0} has been created.", Pattern) });
         }
 
-        public void UpdateDatabase(Redirect redirect, Boolean newEntry)
+        public void UpdateDatabase(RedirectModel redirect, Boolean newEntry)
         {
             // bug fix #1
             // Strip the protocal and domain if entered by the user
