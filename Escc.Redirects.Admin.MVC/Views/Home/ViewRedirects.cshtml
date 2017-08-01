@@ -36,10 +36,16 @@ else
         </div>
     </div>
 
-    <div class="modal fade AddRedirectModal" tabindex="-1" role="dialog" aria-labelledby="AddRedirectModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
+    <div class="modal fade AddRedirectModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-                @{Html.RenderPartial("~/Views/Partials/_AddRedirect.cshtml", new Redirect(0, null, Model.Type, null, null));}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Add Redirect</h4>
+                </div>
+                <div class="modal-body">
+                    @{Html.RenderPartial("~/Views/Partials/_AddRedirect.cshtml", new Redirect(0, null, Model.Type, null, null));}
+                </div>
             </div>
         </div>
     </div>
@@ -118,19 +124,31 @@ else
     var Edit = string.Format("Edit{0}", Row["ID"]);
     var Delete = string.Format("Delete{0}", Row["ID"]);
 
-    <div class="modal fade @Edit" tabindex="-1" role="dialog" aria-labelledby="@Edit Label">
-        <div class="modal-dialog modal-lg" role="document">
+    <div class="modal fade @Edit" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-                @{Html.RenderPartial("~/Views/Partials/_EditRedirect.cshtml", new Redirect((int)Row["ID"], Row["URL"].ToString(), Model.Type, Row["Comment"].ToString(), Row["Destination"].ToString()));}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Edit Redirect</h4>
+                </div>
+                <div class="modal-body">
+                    @{Html.RenderPartial("~/Views/Partials/_EditRedirect.cshtml", new Redirect((int)Row["ID"], Row["URL"].ToString(), Model.Type, Row["Comment"].ToString(), Row["Destination"].ToString()));}
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade @Delete" tabindex="-1" role="dialog" aria-labelledby="@Delete Label">
-        <div class="modal-dialog modal-lg" role="document">
+    <div class="modal fade @Delete" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-                @{Html.RenderPartial("~/Views/Partials/_DeleteRedirect.cshtml", new Redirect((int)Row["ID"], Row["URL"].ToString(), Model.Type, Row["Comment"].ToString(), Row["Destination"].ToString()));}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Delete Redirect</h4>
+                </div>
+                <div class="modal-body">
+                    @{Html.RenderPartial("~/Views/Partials/_DeleteRedirect.cshtml", new Redirect((int)Row["ID"], Row["URL"].ToString(), Model.Type, Row["Comment"].ToString(), Row["Destination"].ToString()));}
+                </div>
             </div>
         </div>
     </div>
-                    }
+                        }

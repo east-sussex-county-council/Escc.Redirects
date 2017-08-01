@@ -112,7 +112,7 @@ namespace Escc.Redirects.Admin.MVC.Controllers
             }
             if(Query == "Null")
             {
-                ResultsList = ResultsList.OrderBy(x => x.ID).ToList();
+                ResultsList = ResultsList.OrderByDescending(x => x.ID).ToList();
                 ResultsList.RemoveRange(0, ShowResultsFrom);
                 var ResultsToShow = ResultsList.Take(500);
                 foreach (var model in ResultsToShow)
@@ -126,7 +126,7 @@ namespace Escc.Redirects.Admin.MVC.Controllers
             }
             else
             {
-                ResultsList = ResultsList.OrderBy(x => x.ID).ToList();
+                ResultsList = ResultsList.OrderByDescending(x => x.ID).ToList();
                 foreach (var model in ResultsList)
                 {
                     if(model.Destination.ToLower().Contains(Query.ToLower()) || model.URL.ToLower().Contains(Query.ToLower()))
