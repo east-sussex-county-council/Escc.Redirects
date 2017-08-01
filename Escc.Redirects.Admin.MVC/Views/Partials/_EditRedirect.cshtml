@@ -40,7 +40,7 @@
                         </div>
                         <div class="well">
                             @Html.LabelFor(model => model.Comment)
-                            @Html.TextBoxFor(model => model.Comment, new { @placeholder = Model.Comment, @class = "form-control" })
+                            @Html.TextAreaFor(model => model.Comment, new { @placeholder = Model.Comment, @class = "form-control" })
                             <span class="help-block">Why has this redirect been added? Who requested it? Who added it?</span>
                         </div>
                         <div class="col-sm-offset-10 col-md-offset-10 col-lg-offset-10">
