@@ -1,4 +1,5 @@
 ﻿@model Escc.Redirects.Admin.MVC.Models.DataModels.RedirectModel
+
 <p></p>
 <div class="panel panel-success">
     @{
@@ -39,6 +40,7 @@
                         @Html.LabelFor(model => model.Comment)
                         @Html.TextAreaFor(model => model.Comment, new { @placeholder = "Comment", @class = "form-control" })
                         <span class="help-block">Why has this redirect been added? Who requested it? Who added it?</span>
+                        @Html.ValidationMessageFor(model => model.Comment, null, new { @class = "alert alert-error" })
                     </div>
                 </div>
             </div>

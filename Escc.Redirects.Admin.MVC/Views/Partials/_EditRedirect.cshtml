@@ -14,34 +14,35 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-12">
-                    <div class="form-group">
-                        @Html.HiddenFor(model => model.Type)
-                        @Html.HiddenFor(model => model.RedirectID)
-                        <div class="well">
-                            @Html.LabelFor(model => model.Pattern)
-                            @Html.TextBoxFor(model => model.Pattern, new { @placeholder = Model.Pattern, @class = "form-control" })
-                            @{
-                                if (Model.Type == 1)
-                                {
-                                    <span class="help-block">This is the url you want to use</span>
-                                }
-                                else
-                                {
-                                    <span class="help-block">This is where you are. For example, for "https://www.eastsussex.gov.uk/alerts" just type "alerts"</span>
-                                }
+                <div class="form-group">
+                    @Html.HiddenFor(model => model.Type)
+                    @Html.HiddenFor(model => model.RedirectID)
+                    <div class="well">
+                        @Html.LabelFor(model => model.Pattern)
+                        @Html.TextBoxFor(model => model.Pattern, new { @placeholder = Model.Pattern, @class = "form-control" })
+                        @{
+                            if (Model.Type == 1)
+                            {
+                                <span class="help-block">This is the url you want to use</span>
                             }
-                        </div>
-                        <div class="well">
-                            @Html.LabelFor(model => model.Destination)
-                            @Html.TextBoxFor(model => model.Destination, new { @placeholder = Model.Destination, @class = "form-control" })
-                            <span class="help-block">This is where your going. Make sure to use the whole URL, for example "https://www.eastsussex.gov.uk/jobs" </span>
-                        </div>
-                        <div class="well">
-                            @Html.LabelFor(model => model.Comment)
-                            @Html.TextAreaFor(model => model.Comment, new { @placeholder = Model.Comment, @class = "form-control" })
-                            <span class="help-block">Why has this redirect been added? Who requested it? Who added it?</span>
-                        </div>
-                    </div>                          
+                            else
+                            {
+                                <span class="help-block">This is where you are. For example, for "https://www.eastsussex.gov.uk/alerts" just type "alerts"</span>
+                            }
+                        }
+                    </div>
+                    <div class="well">
+                        @Html.LabelFor(model => model.Destination)
+                        @Html.TextBoxFor(model => model.Destination, new { @placeholder = Model.Destination, @class = "form-control" })
+                        <span class="help-block">This is where your going. Make sure to use the whole URL, for example "https://www.eastsussex.gov.uk/jobs" </span>
+                    </div>
+                    <div class="well">
+                        @Html.LabelFor(model => model.Comment)
+                        @Html.TextAreaFor(model => model.Comment, new { @placeholder = Model.Comment, @class = "form-control" })
+                        <span class="help-block">Why has this redirect been added? Who requested it? Who added it?</span>
+                        @Html.ValidationMessageFor(model => model.Comment, null, new { @class = "alert alert-error" })
+                    </div>
+                </div>
             </div>
         </div>
     </div>
