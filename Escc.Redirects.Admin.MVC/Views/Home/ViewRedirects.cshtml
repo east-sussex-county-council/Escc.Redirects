@@ -25,7 +25,7 @@ else
 {
     <p></p>
     <div class="col-sm-12 col-md-12 col-lg-12">
-        <div class="panel panel-info">
+        <div class="panel panel-primary text-center">
             <div class="panel-heading">
                 <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> @Model.RedirectTypeString</h3>
             </div>
@@ -60,9 +60,17 @@ else
                             if (Model.Total > 500)
                             {
                                 <p></p>
-                                <div class="panel panel-primary">
+                                <div class="panel panel-success">
                                     <div class="panel-heading"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search All @Model.RedirectTypeString</div>
                                     <div class="panel-body">
+                                        <div class="row well-sm">
+                                            <div class="alert alert-info" role="alert">
+                                                <ul>
+                                                    <li>The table below only contains <b>500 redirects</b> at a time to keep this site running smoothly. As a result the search box  in the table panel only searches within the 500 redirects it contains.</li>
+                                                    <li>To <b>search all</b> of the redirects, use the search box in this panel instead.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             @using (Html.BeginForm("ViewRedirects", "Home", FormMethod.Post))
                                             {
@@ -87,7 +95,7 @@ else
                                 <div class="alert alert-success" role="alert">@Model.Alert</div>
                             }
                             <p></p>
-                            <div class="panel panel-info">
+                            <div class="panel panel-primary">
                                 <div class="panel-heading">
                                     @if (Model.Search)
                                     {
