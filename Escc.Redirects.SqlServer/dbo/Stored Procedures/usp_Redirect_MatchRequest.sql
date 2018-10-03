@@ -16,7 +16,8 @@ BEGIN
 	SELECT TOP 1 RedirectId, Destination, Type FROM Redirect
 	WHERE 
 		(Type = 1 AND LOWER(@request) = LOWER(Pattern)) OR -- Match short URL
-		(Type = 2 AND LEFT(LOWER(@request), LEN(Pattern)) = LOWER(Pattern)) -- Starts with redirect URL
+		(Type = 2 AND ((LEFT(LOWER(@request), LEN(Pattern)) = LOWER(Pattern)) OR
+					   (LEFT(LOWER(@request) + '/', LEN(Pattern)) = LOWER(Pattern)))) -- Starts with redirect URL
 	ORDER BY Type, LEN(Pattern) DESC
 END
 GO
