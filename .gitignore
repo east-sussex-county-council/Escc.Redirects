@@ -38,3 +38,4 @@ packages
 *.GhostDoc.xml
 *.dbmdl
 App_Data
+.vs
