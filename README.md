@@ -9,7 +9,7 @@ Provide a way to redirect URLs when the original resource is no longer available
 - querystrings on URLs are preserved when redirecting, unless the new URL already has a querystring
 - if a page is missing and no matching redirect is found, it falls through to standard IIS/ASP.NET behaviour for 404 responses 
 
-Errors are reported to [Exceptionless](https://github.com/exceptionless/Exceptionless). The NuGet package is created using [NuBuild](https://github.com/bspell1/nubuild).
+Errors are reported to [Exceptionless](https://github.com/exceptionless/Exceptionless). 
 
 ## Use 404 pages, not an HTTP module, to implement redirects
 Using the `RedirectsModule` from this project is not usually the best way to implement redirects, because it runs early in the ASP.NET pipeline looking for redirects on every request even if a page actually exists. The redirects module also breaks the back office login when used in an Umbraco application. 
