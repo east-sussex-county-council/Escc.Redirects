@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Escc.Redirects.Tests</RootNamespace>
     <AssemblyName>Escc.Redirects.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -60,13 +60,13 @@
     <Compile Include="ConvertToAbsoluteUrlHandlerTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Escc.Redirects\Escc.Redirects.csproj">
-      <Project>{d7a58b81-0d9a-431d-ae46-9390638fb7d5}</Project>
-      <Name>Escc.Redirects</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Escc.Redirects\Escc.Redirects.csproj">
+      <Project>{e8f3c2c5-3363-477f-95ca-d44d6f33fe32}</Project>
+      <Name>Escc.Redirects</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

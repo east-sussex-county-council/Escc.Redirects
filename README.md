@@ -2,7 +2,7 @@
 
 Provide a way to redirect URLs when the original resource is no longer available.
 
-- if a URL matches a Microsoft Content Management Server 2002 page, it's not redirected
+- if a URL matches an Umbraco page, it's not redirected
 - if a URL matches an `*.aspx` file on disk, it's not redirected
 - if a URL is too long for `HostingEnvironment.MapPath` to handle, it's not redirected
 - if a page is missing but a matching redirect is found, the redirect is executed
@@ -11,45 +11,11 @@ Provide a way to redirect URLs when the original resource is no longer available
 
 Errors are reported to [Exceptionless](https://github.com/exceptionless/Exceptionless). 
 
-## Use 404 pages, not an HTTP module, to implement redirects
-Using the `RedirectsModule` from this project is not usually the best way to implement redirects, because it runs early in the ASP.NET pipeline looking for redirects on every request even if a page actually exists. The redirects module also breaks the back office login when used in an Umbraco application. 
-
-A better solution is to configure the custom error page for 404 responses to check for redirects before returning a 404 response, but that can be done using the same logic from this project that is used by the module. 
+## Use 404 pages to implement redirects
+To implement redirects using this project add code to a custom error page for 404 responses to check for redirects before returning a 404 response.
 See the documentation for [Escc.EastSussexGovUK](https://github.com/east-sussex-county-council/Escc.EastSussexGovUK) for an example of how to configure a 404 page that checks for redirects.
 
-## Configure the HTTP module
-
-To begin redirecting URLs you need to register the HTTP module in `web.config`. For IIS6 or IIS7+ in Classic mode: 
-
-	<configuration>
-	  <system.web>
-	    <httpModules> 
-	      <add name="RedirectsModule" type="Escc.Redirects.RedirectsModule" />
-	    </httpModules>
-	  </system.web>
-	</configuration>
-
-For IIS7+ in Integrated mode:
-
-	<configuration>
-	  <system.webServer>
-	    <modules> 
-	      <add name="RedirectsModule" type="Escc.Redirects.RedirectsModule" />
-	    </modules>
-	  </system.webServer>
-	</configuration>
-
-## Excluding specific patterns from redirection
-
-Because an HTTP module executes early in the request pipeline, there may be something later which would handle a URL that might otherwise be redirected. For example, the request might be rewritten in the `Application_BeginRequest` event in `global.asax.cs`. 
-
-You can configure paths to be ignored using comma-separated regular expressions in `web.config`:
-
-	<configuration>
-		<appSettings>
-		    <add key="Escc.Redirects.IgnorePaths" value="page[abc].aspx,page[0-9].aspx" />
-	  	</appSettings>
-	</configuration>
+You will need to use handlers that update the HTTP response when a redirect is matched. For projects targeting .NET Framework, these are provided in the `Escc.Redirects.Handlers` project.
 
 ## Managing redirects in SQL Server 
 To use the default `SqlServerRedirectMatcher` you need to create a database using the script in `SqlServer.sql` and configure the connection in `web.config`:

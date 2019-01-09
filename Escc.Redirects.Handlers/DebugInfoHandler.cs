@@ -6,7 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.Caching;
 
-namespace Escc.Redirects
+namespace Escc.Redirects.Handlers
 {
     /// <summary>
     /// Adds debug info to the redirect to make management easier

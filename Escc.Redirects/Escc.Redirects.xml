@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Escc.Redirects</name>
+    </assembly>
+    <members>
+        <member name="T:Escc.Redirects.ConvertToAbsoluteUrlHandler">
+            <summary>
+            Ensures that the destination of a redirect is an absolute URL
+            </summary>
+        </member>
+        <member name="M:Escc.Redirects.ConvertToAbsoluteUrlHandler.HandleRedirect(Escc.Redirects.Redirect)">
+            <summary>
+            Execute the handler, and return an updated redirect
+            </summary>
+            <param name="redirect">The redirect.</param>
+            <returns>
+            The same redirect, which may have been updated
+            </returns>
+            <exception cref="T:System.ArgumentNullException">redirect</exception>
+            <exception cref="T:System.NullReferenceException">redirect.DestinationUrl cannot be null</exception>
+        </member>
+        <member name="T:Escc.Redirects.IRedirectHandler">
+            <summary>
+            Take an action on a matched redirect
+            </summary>
+        </member>
+        <member name="M:Escc.Redirects.IRedirectHandler.HandleRedirect(Escc.Redirects.Redirect)">
+            <summary>
+            Execute the handler, and return an updated redirect
+            </summary>
+            <param name="redirect">The redirect.</param>
+            <returns>The same redirect, which may have been updated</returns>
+        </member>
+        <member name="T:Escc.Redirects.IRedirectMatcher">
+            <summary>
+            Try to match the requested URL against a configured redirect
+            </summary>
+        </member>
+        <member name="M:Escc.Redirects.IRedirectMatcher.MatchRedirect(System.Uri)">
+            <summary>
+            Try to match the requested URL against a configured redirect
+            </summary>
+            <param name="requestedUrl">The requested URL.</param>
+            <returns>The matched redirect, or <c>null</c> if no matching redirect found</returns>
+        </member>
+        <member name="T:Escc.Redirects.NotFoundRequestPathResolver">
+            <summary>
+            Extracts the originally requested path from the URL passed to a 404 page
+            </summary>
+        </member>
+        <member name="M:Escc.Redirects.NotFoundRequestPathResolver.NormaliseRequestedPath(System.Uri)">
+            <summary>
+            Find the path which was originally requested and normalise it to a server-relative URL. The URL format is different depending on whether it came direct from IIS or via ASP.NET
+            </summary>
+            <param name="requestUrl">The request URL.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Escc.Redirects.PreserveQueryStringHandler">
+            <summary>
+            Preserves the querystring of the original request in the destination request, unless the destination has its own
+            </summary>
+        </member>
+        <member name="M:Escc.Redirects.PreserveQueryStringHandler.HandleRedirect(Escc.Redirects.Redirect)">
+            <summary>
+            Execute the handler, and return an updated redirect
+            </summary>
+            <param name="redirect">The redirect.</param>
+            <returns>
+            The same redirect, which may have been updated
+            </returns>
+            <exception cref="T:System.ArgumentNullException">redirect</exception>
+            <exception cref="T:System.NullReferenceException">
+            redirect.RequestedUrl cannot be null
+            or
+            redirect.DestinationUrl cannot be null
+            </exception>
+        </member>
+        <member name="T:Escc.Redirects.Redirect">
+            <summary>
+            An instruction to redirect one URL to another
+            </summary>
+        </member>
+        <member name="P:Escc.Redirects.Redirect.RedirectId">
+            <summary>
+            Gets or sets the redirect identifier.
+            </summary>
+            <value>
+            The redirect identifier.
+            </value>
+        </member>
+        <member name="P:Escc.Redirects.Redirect.StatusCode">
+            <summary>
+            Gets or sets the HTTP status code to use.
+            </summary>
+            <value>
+            The status code.
+            </value>
+        </member>
+        <member name="P:Escc.Redirects.Redirect.RequestedUrl">
+            <summary>
+            Gets or sets the URL to redirect from.
+            </summary>
+            <value>
+            The requested URL.
+            </value>
+        </member>
+        <member name="P:Escc.Redirects.Redirect.DestinationUrl">
+            <summary>
+            Gets or sets the destination URL.
+            </summary>
+            <value>
+            The destination URL.
+            </value>
+        </member>
+        <member name="P:Escc.Redirects.Redirect.Comment">
+            <summary>
+            Gets or sets a comment explaining reason for the redirect.
+            </summary>
+            <value>
+            The comment.
+            </value>
+        </member>
+        <member name="T:Escc.Redirects.SqlServerRedirectMatcher">
+            <summary>
+            Looks up the requested URL against a list of redirects in a SQL server database
+            </summary>
+            <seealso cref="T:Escc.Redirects.IRedirectMatcher" />
+        </member>
+        <member name="M:Escc.Redirects.SqlServerRedirectMatcher.#ctor(System.String)">
+            <summary>
+            Creates a new instance of <see cref="T:Escc.Redirects.SqlServerRedirectMatcher"/>
+            </summary>
+            <param name="connectionString">The connection string for the SQL Server database containing the redirects</param>
+        </member>
+        <member name="P:Escc.Redirects.SqlServerRedirectMatcher.ThrowErrorOnMissingConfiguration">
+            <summary>
+            Gets or sets whether to throw an error if the connection to SQL Server is not configured
+            </summary>
+            <value>
+            <c>true</c> to throw an error on missing configuration; <c>false</c> to return <c>null</c>.
+            </value>
+        </member>
+        <member name="M:Escc.Redirects.SqlServerRedirectMatcher.MatchRedirect(System.Uri)">
+            <summary>
+            Try to match the requested URL against a configured redirect
+            </summary>
+            <param name="requestedUrl">The requested URL.</param>
+            <returns>
+            The matched redirect, or <c>null</c> if no matching redirect found
+            </returns>
+            <exception cref="T:System.ArgumentNullException">requestedUrl</exception>
+            <exception cref="!:ConfigurationErrorsException">RedirectsReader connection string not found in configuration file</exception>
+        </member>
+    </members>
+</doc>

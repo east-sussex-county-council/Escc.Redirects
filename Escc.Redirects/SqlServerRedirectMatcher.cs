@@ -3,7 +3,6 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
-using System.Web.UI.WebControls;
 using Dapper;
 
 namespace Escc.Redirects
@@ -14,6 +13,17 @@ namespace Escc.Redirects
     /// <seealso cref="Escc.Redirects.IRedirectMatcher" />
     public class SqlServerRedirectMatcher : IRedirectMatcher
     {
+        private readonly string _connectionString;
+
+        /// <summary>
+        /// Creates a new instance of <see cref="SqlServerRedirectMatcher"/>
+        /// </summary>
+        /// <param name="connectionString">The connection string for the SQL Server database containing the redirects</param>
+        public SqlServerRedirectMatcher(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
         /// <summary>
         /// Gets or sets whether to throw an error if the connection to SQL Server is not configured
         /// </summary>
@@ -34,16 +44,9 @@ namespace Escc.Redirects
         public Redirect MatchRedirect(Uri requestedUrl)
         {
             if (requestedUrl == null) throw new ArgumentNullException("requestedUrl");
-            if (ConfigurationManager.ConnectionStrings["RedirectsReader"] == null || String.IsNullOrEmpty(ConfigurationManager.ConnectionStrings["RedirectsReader"].ConnectionString))
-            {
-                if (ThrowErrorOnMissingConfiguration)
-                {
-                    throw new ConfigurationErrorsException("RedirectsReader connection string not found in configuration file");
-                }
-                else return null;
-            }
+            if (String.IsNullOrWhiteSpace(_connectionString)) return null;
 
-            using (var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["RedirectsReader"].ConnectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 using (var reader = connection.ExecuteReader("usp_Redirect_MatchRequest", new { request = requestedUrl.PathAndQuery.TrimStart('/') }, commandType: CommandType.StoredProcedure))
                 {

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using Escc.Web;
 
-namespace Escc.Redirects
+namespace Escc.Redirects.Handlers
 {
     /// <summary>
     /// Once a URL has been recognised, this redirects to it with correct HTTP response
