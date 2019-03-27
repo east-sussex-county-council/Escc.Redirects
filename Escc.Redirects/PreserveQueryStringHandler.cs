@@ -8,7 +8,7 @@ namespace Escc.Redirects
     /// <summary>
     /// Preserves the querystring of the original request in the destination request, unless the destination has its own
     /// </summary>
-    public class PreserveQueryStringHandler : IRedirectHandler
+    public class PreserveQueryStringHandler : IPreserveQueryStringHandler
     {
         /// <summary>
         /// Execute the handler, and return an updated redirect

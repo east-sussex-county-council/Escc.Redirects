@@ -7,10 +7,10 @@ namespace Escc.Redirects
     /// <summary>
     /// Extracts the originally requested path from the URL passed to a 404 page
     /// </summary>
-    public class NotFoundRequestPathResolver
+    public class NotFoundRequestPathResolver : INotFoundRequestPathResolver
     {
         /// <summary>
-        /// Find the path which was originally requested and normalise it to a server-relative URL. The URL format is different depending on whether it came direct from IIS or via ASP.NET
+        /// Find the path which was originally requested and normalise it to an absolute URL. The URL format is different depending on whether it came direct from IIS or via ASP.NET
         /// </summary>
         /// <param name="requestUrl">The request URL.</param>
         /// <returns></returns>

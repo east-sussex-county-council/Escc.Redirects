@@ -20,6 +20,28 @@
             <exception cref="T:System.ArgumentNullException">redirect</exception>
             <exception cref="T:System.NullReferenceException">redirect.DestinationUrl cannot be null</exception>
         </member>
+        <member name="T:Escc.Redirects.IConvertToAbsoluteUrlHandler">
+            <summary>
+            Ensures that the destination of a redirect is an absolute URL
+            </summary>
+        </member>
+        <member name="T:Escc.Redirects.INotFoundRequestPathResolver">
+            <summary>
+            Extracts the originally requested path from the URL passed to a 404 page
+            </summary>
+        </member>
+        <member name="M:Escc.Redirects.INotFoundRequestPathResolver.NormaliseRequestedPath(System.Uri)">
+            <summary>
+            Find the path which was originally requested and normalise it to an absolute URL.
+            </summary>
+            <param name="requestUrl">The request URL.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Escc.Redirects.IPreserveQueryStringHandler">
+            <summary>
+            Preserves the querystring of the original request in the destination request, unless the destination has its own
+            </summary>
+        </member>
         <member name="T:Escc.Redirects.IRedirectHandler">
             <summary>
             Take an action on a matched redirect
@@ -51,7 +73,7 @@
         </member>
         <member name="M:Escc.Redirects.NotFoundRequestPathResolver.NormaliseRequestedPath(System.Uri)">
             <summary>
-            Find the path which was originally requested and normalise it to a server-relative URL. The URL format is different depending on whether it came direct from IIS or via ASP.NET
+            Find the path which was originally requested and normalise it to an absolute URL. The URL format is different depending on whether it came direct from IIS or via ASP.NET
             </summary>
             <param name="requestUrl">The request URL.</param>
             <returns></returns>
@@ -121,6 +143,16 @@
             The comment.
             </value>
         </member>
+        <member name="T:Escc.Redirects.RedirectSettings">
+            <summary>
+            Settings for working with redirects
+            </summary>
+        </member>
+        <member name="P:Escc.Redirects.RedirectSettings.ConnectionString">
+            <summary>
+            The connection string to use with <see cref="T:Escc.Redirects.SqlServerRedirectMatcher"/>
+            </summary>
+        </member>
         <member name="T:Escc.Redirects.SqlServerRedirectMatcher">
             <summary>
             Looks up the requested URL against a list of redirects in a SQL server database
@@ -133,13 +165,11 @@
             </summary>
             <param name="connectionString">The connection string for the SQL Server database containing the redirects</param>
         </member>
-        <member name="P:Escc.Redirects.SqlServerRedirectMatcher.ThrowErrorOnMissingConfiguration">
+        <member name="M:Escc.Redirects.SqlServerRedirectMatcher.#ctor(Microsoft.Extensions.Options.IOptions{Escc.Redirects.RedirectSettings})">
             <summary>
-            Gets or sets whether to throw an error if the connection to SQL Server is not configured
+            Creates a new instance of <see cref="T:Escc.Redirects.SqlServerRedirectMatcher"/>
             </summary>
-            <value>
-            <c>true</c> to throw an error on missing configuration; <c>false</c> to return <c>null</c>.
-            </value>
+            <param name="redirectSettings">Settings for redirects, including the connection string for the SQL Server database containing the redirects</param>
         </member>
         <member name="M:Escc.Redirects.SqlServerRedirectMatcher.MatchRedirect(System.Uri)">
             <summary>
@@ -150,7 +180,6 @@
             The matched redirect, or <c>null</c> if no matching redirect found
             </returns>
             <exception cref="T:System.ArgumentNullException">requestedUrl</exception>
-            <exception cref="!:ConfigurationErrorsException">RedirectsReader connection string not found in configuration file</exception>
         </member>
     </members>
 </doc>

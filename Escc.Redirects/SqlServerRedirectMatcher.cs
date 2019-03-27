@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using Dapper;
+using Microsoft.Extensions.Options;
 
 namespace Escc.Redirects
 {
@@ -25,12 +26,13 @@ namespace Escc.Redirects
         }
 
         /// <summary>
-        /// Gets or sets whether to throw an error if the connection to SQL Server is not configured
+        /// Creates a new instance of <see cref="SqlServerRedirectMatcher"/>
         /// </summary>
-        /// <value>
-        /// <c>true</c> to throw an error on missing configuration; <c>false</c> to return <c>null</c>.
-        /// </value>
-        public bool ThrowErrorOnMissingConfiguration { get; set; } = true;
+        /// <param name="redirectSettings">Settings for redirects, including the connection string for the SQL Server database containing the redirects</param>
+        public SqlServerRedirectMatcher(IOptions<RedirectSettings> redirectSettings)
+        {
+            _connectionString = redirectSettings?.Value?.ConnectionString;
+        }
 
         /// <summary>
         /// Try to match the requested URL against a configured redirect
@@ -40,7 +42,6 @@ namespace Escc.Redirects
         /// The matched redirect, or <c>null</c> if no matching redirect found
         /// </returns>
         /// <exception cref="System.ArgumentNullException">requestedUrl</exception>
-        /// <exception cref="ConfigurationErrorsException">RedirectsReader connection string not found in configuration file</exception>
         public Redirect MatchRedirect(Uri requestedUrl)
         {
             if (requestedUrl == null) throw new ArgumentNullException("requestedUrl");

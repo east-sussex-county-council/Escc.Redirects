@@ -7,7 +7,7 @@ namespace Escc.Redirects
     /// <summary>
     /// Ensures that the destination of a redirect is an absolute URL
     /// </summary>
-    public class ConvertToAbsoluteUrlHandler : IRedirectHandler
+    public class ConvertToAbsoluteUrlHandler : IConvertToAbsoluteUrlHandler
     {
         /// <summary>
         /// Execute the handler, and return an updated redirect

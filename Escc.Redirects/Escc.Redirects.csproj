@@ -6,11 +6,11 @@
     <Company>East Sussex County Council</Company>
     <Description>Provides a way to redirect URLs when the original resource is no longer available.</Description>
     <Copyright>East Sussex County Council</Copyright>
-    <Version>3.0.1</Version>
+    <Version>4.0.0</Version>
     <PackageIconUrl>https://www.eastsussex.gov.uk/apple-touch-icon.png</PackageIconUrl>
     <PackageLicenseUrl>http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/east-sussex-county-council/Escc.Redirects</PackageProjectUrl>
-    <PackageReleaseNotes>3.0.1 declares the dependency on System.Data.SqlClient</PackageReleaseNotes>
+    <PackageReleaseNotes>4.0.0 adds additional interfaces for use with dependency injection in ASP.NET Core. It also removes an unused property for determining whether errors are thrown.</PackageReleaseNotes>
     <NeutralLanguage>en-GB</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
@@ -22,6 +22,7 @@
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.5" />
     <PackageReference Include="Exceptionless" Version="4.3.2012" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="2.2.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.6.0" />
   </ItemGroup>
 
